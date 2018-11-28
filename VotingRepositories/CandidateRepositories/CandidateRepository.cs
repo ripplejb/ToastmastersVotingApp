@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 
@@ -22,17 +23,24 @@ namespace VotingRepositories.CandidateRepositories
         
         #region Public Methods
 
-        public Candidate Add(Candidate candidate)
+        public async Task<Candidate> AddAsync(Candidate candidate)
         {
             var result = _votingContext.Candidates.Add(candidate).Entity;
-            _votingContext.SaveChanges();
+            await _votingContext.SaveChangesAsync();
             return result;
         }
 
-        public Candidate Update(Candidate candidate)
+        public async Task<Candidate> UpdateAsync(Candidate candidate)
         {
             var result = _votingContext.Candidates.Update(candidate).Entity;
-            _votingContext.SaveChanges();
+            await _votingContext.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task<Candidate> RemoveAsync(Candidate candidate)
+        {
+            var result = _votingContext.Candidates.Remove(candidate).Entity;
+            await _votingContext.SaveChangesAsync();
             return result;
         }
 
