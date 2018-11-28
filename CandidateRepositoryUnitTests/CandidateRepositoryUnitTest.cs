@@ -33,7 +33,7 @@ namespace CandidateRepositoryUnitTests
         #endregion
 
         [Fact]
-        public async void CreateTest()
+        public async void CreateTestAsync()
         {
             // Arrange
             using (var context = new VotingContext(GetDbContextOptions()))
@@ -66,7 +66,7 @@ namespace CandidateRepositoryUnitTests
         }
 
         [Fact]
-        public async void DuplicateTest()
+        public async void DuplicateTestAsync()
         {
             // Assert
             await Assert.ThrowsAsync<DbUpdateException>(async () =>
@@ -92,7 +92,7 @@ namespace CandidateRepositoryUnitTests
         }
 
         [Fact]
-        public async void UpdateTest()
+        public async void UpdateTestAsync()
         {
             // Arrange
             using (var context = new VotingContext(GetDbContextOptions()))
@@ -144,7 +144,7 @@ namespace CandidateRepositoryUnitTests
         /// As long as the Id is same, the remove will work.
         /// </summary>
         [Fact]
-        public async void RemoveAfterChangeTest()
+        public async void RemoveAfterChangeTestAsync()
         {
             // Arrange
             using (var context = new VotingContext(GetDbContextOptions()))
@@ -167,6 +167,72 @@ namespace CandidateRepositoryUnitTests
                 
             }
         }
-        
+
+        [Fact]
+        public async void SearchTestAsync()
+        {
+            // Arrange
+            using (var context = new VotingContext(GetDbContextOptions()))
+            {
+                var repository = new CandidateRepository(context);
+
+                // Act
+                await repository.AddAsync(new Candidate()
+                {
+                    Id = 1,
+                    Name = "Ripal Barot"
+                });
+                await repository.AddAsync(new Candidate()
+                {
+                    Id = 2,
+                    Name = "Falguni Barot"
+                });
+                await repository.AddAsync(new Candidate()
+                {
+                    Id = 3,
+                    Name = "Neil Barot"
+                });
+
+                // Assert
+                var candidateList = repository.Search(new CandidateSearchRequest
+                {
+                    Name = "Barot",
+                });
+                Assert.Equal(3, candidateList.Count());
+            }
+        }
+
+        [Fact]
+        public async void GetByIdTestAsync()
+        {
+            // Arrange
+            using (var context = new VotingContext(GetDbContextOptions()))
+            {
+                var repository = new CandidateRepository(context);
+
+                // Act
+                await repository.AddAsync(new Candidate()
+                {
+                    Id = 1,
+                    Name = "Ripal Barot"
+                });
+                await repository.AddAsync(new Candidate()
+                {
+                    Id = 2,
+                    Name = "Falguni Barot"
+                });
+                await repository.AddAsync(new Candidate()
+                {
+                    Id = 3,
+                    Name = "Neil Barot"
+                });
+
+                // Assert
+                var candidate = repository.GetById(2);
+                Assert.Equal("Falguni Barot", candidate.Name);
+            }
+            
+        }
+
     }
 }

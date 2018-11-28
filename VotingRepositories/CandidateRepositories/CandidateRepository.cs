@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
@@ -42,6 +44,18 @@ namespace VotingRepositories.CandidateRepositories
             var result = _votingContext.Candidates.Remove(candidate).Entity;
             await _votingContext.SaveChangesAsync();
             return result;
+        }
+
+        public IEnumerable<Candidate> Search(CandidateSearchRequest candidateSearchRequest)
+        {
+            return from candidate in _votingContext.Candidates
+                where candidate.Name.Contains(candidateSearchRequest.Name)
+                select candidate;
+        }
+
+        public Candidate GetById(int id)
+        {
+            return _votingContext.Candidates.FirstOrDefault(c => c.Id == id);
         }
 
         #endregion
