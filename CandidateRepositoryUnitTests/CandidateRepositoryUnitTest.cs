@@ -108,7 +108,7 @@ namespace CandidateRepositoryUnitTests
                 // Act
                 repository.Add(candidate);
                 candidate.Name = "Anila Barot";
-                repository.Update(candidate.Id, candidate);
+                repository.Update(candidate);
                 
                 // Assert
                 Assert.Equal("Anila Barot",

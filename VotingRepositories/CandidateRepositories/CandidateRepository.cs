@@ -29,6 +29,13 @@ namespace VotingRepositories.CandidateRepositories
             return result;
         }
 
+        public Candidate Update(Candidate candidate)
+        {
+            var result = _votingContext.Candidates.Update(candidate).Entity;
+            _votingContext.SaveChanges();
+            return result;
+        }
+
         #endregion
 
     }
