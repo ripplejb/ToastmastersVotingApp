@@ -68,9 +68,10 @@ namespace CandidateRepositoryUnitTests
         [Fact]
         public void DuplicateTest()
         {
-            // Arrange
+            // Assert
             Assert.Throws<DbUpdateException>(() =>
             {
+                // Arrange
                 using (var context = new VotingContext(GetDbContextOptions()))
                 {
                     var repository = new CandidateRepository(context);
@@ -88,6 +89,32 @@ namespace CandidateRepositoryUnitTests
                     });
                 }
             });
+        }
+
+        [Fact]
+        public void UpdateTest()
+        {
+            // Arrange
+            using (var context = new VotingContext(GetDbContextOptions()))
+            {
+                var repository = new CandidateRepository(context);
+                var candidate = new Candidate
+                {
+                    Id = 1,
+                    Name = "Ripal Barot"
+                };
+                
+                
+                // Act
+                repository.Add(candidate);
+                candidate.Name = "Anila Barot";
+                repository.Update(candidate.Id, candidate);
+                
+                // Assert
+                Assert.Equal("Anila Barot",
+                    context.Candidates.Where(c => c.Name == "Anila Barot").Select(c => c.Name).FirstOrDefault());
+                
+            }
         }
     }
 }
