@@ -66,11 +66,8 @@ namespace CandidateRepositoryUnitTests
         }
 
         [Fact]
-        public async void DuplicateTestAsync()
+        public async void DuplicateAllowedTestAsync()
         {
-            // Assert
-            await Assert.ThrowsAsync<DbUpdateException>(async () =>
-            {
                 // Arrange
                 using (var context = new VotingContext(GetDbContextOptions()))
                 {
@@ -87,8 +84,10 @@ namespace CandidateRepositoryUnitTests
                         Id = 2,
                         Name = "Jashavant Barot"
                     });
+                    
+                    // Assert
+                    Assert.Equal(2, context.Candidates.Count());
                 }
-            });
         }
 
         [Fact]

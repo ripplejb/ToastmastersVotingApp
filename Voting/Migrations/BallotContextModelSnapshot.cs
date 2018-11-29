@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Voting.ServiceContracts.DbContexts;
-using Voting.ServiceContracts.Models;
 
 namespace Voting.Migrations
 {
@@ -26,11 +25,7 @@ namespace Voting.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedDate");
-
                     b.Property<int?>("ElectionId");
-
-                    b.Property<DateTime>("ExpirationDate");
 
                     b.Property<string>("Name");
 
@@ -72,10 +67,6 @@ namespace Voting.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
-
                     b.ToTable("Candidates");
                 });
 
@@ -85,7 +76,11 @@ namespace Voting.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedDate");
+
                     b.Property<Guid>("ElectionQr");
+
+                    b.Property<DateTime>("ExpirationDate");
 
                     b.HasKey("Id");
 

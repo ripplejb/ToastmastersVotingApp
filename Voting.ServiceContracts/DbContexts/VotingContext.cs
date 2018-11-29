@@ -22,16 +22,5 @@ namespace Voting.ServiceContracts.DbContexts
 
         #endregion
 
-        #region Protected Methods
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Candidate>()
-                .HasIndex(c => new {c.Name})
-                .IsUnique(true);
-        }
-
-        #endregion
-        
     }
 }
