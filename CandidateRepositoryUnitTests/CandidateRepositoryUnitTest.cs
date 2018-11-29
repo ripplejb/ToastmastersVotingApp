@@ -194,7 +194,7 @@ namespace CandidateRepositoryUnitTests
                 });
 
                 // Assert
-                var candidateList = repository.Search(new CandidateSearchRequest
+                var candidateList = await repository.SearchAsync(new CandidateSearchRequest
                 {
                     Name = "Barot",
                 });
@@ -228,7 +228,7 @@ namespace CandidateRepositoryUnitTests
                 });
 
                 // Assert
-                var candidate = repository.GetById(2);
+                var candidate = await repository.GetByIdAsync(2);
                 Assert.Equal("Falguni Barot", candidate.Name);
             }
             

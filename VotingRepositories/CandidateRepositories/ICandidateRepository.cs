@@ -9,7 +9,7 @@ namespace VotingRepositories.CandidateRepositories
         Task<Candidate> AddAsync(Candidate candidate);
         Task<Candidate> UpdateAsync(Candidate candidate);
         Task<Candidate>  RemoveAsync(Candidate candidate);
-        IEnumerable<Candidate> Search(CandidateSearchRequest candidateSearchRequest);
-        Candidate GetById(int id);
+        Task<IEnumerable<Candidate>> SearchAsync(CandidateSearchRequest candidateSearchRequest);
+        Task<Candidate> GetByIdAsync(int id);
     }
 }

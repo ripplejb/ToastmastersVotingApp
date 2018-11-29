@@ -46,16 +46,17 @@ namespace VotingRepositories.CandidateRepositories
             return result;
         }
 
-        public IEnumerable<Candidate> Search(CandidateSearchRequest candidateSearchRequest)
+        public async Task<IEnumerable<Candidate>> SearchAsync(CandidateSearchRequest candidateSearchRequest)
         {
-            return from candidate in _votingContext.Candidates
+            return await Task<IEnumerable<Candidate>>.Factory.StartNew(() => 
+                from candidate in _votingContext.Candidates
                 where candidate.Name.Contains(candidateSearchRequest.Name)
-                select candidate;
+                select candidate);
         }
 
-        public Candidate GetById(int id)
+        public async Task<Candidate> GetByIdAsync(int id)
         {
-            return _votingContext.Candidates.FirstOrDefault(c => c.Id == id);
+            return await Task<Candidate>.Factory.StartNew(() => _votingContext.Candidates.FirstOrDefault(c => c.Id == id));
         }
 
         #endregion
