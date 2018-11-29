@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 375 667">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-iPhone_6_7_8_2);
+      }
+
+      .cls-3, .cls-7 {
+        fill: #6100ed;
+      }
+
+      .cls-4, .cls-8 {
+        fill: #fff;
+      }
+
+      .cls-11, .cls-12, .cls-4 {
+        font-size: 20px;
+        letter-spacing: 0.013em;
+      }
+
+      .cls-11, .cls-12, .cls-4, .cls-6, .cls-7 {
+        font-family: SegoeUI, Segoe UI;
+      }
+
+      .cls-5 {
+        opacity: 0.07;
+      }
+
+      .cls-6 {
+        fill: rgba(0,0,0,0.87);
+        font-size: 16px;
+        letter-spacing: 0.009em;
+      }
+
+      .cls-7 {
+        font-size: 12px;
+        letter-spacing: 0.034em;
+      }
+
+      .cls-9 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-10 {
+        opacity: 0.18;
+      }
+
+      .cls-11 {
+        fill: #6500f6;
+      }
+
+      .cls-12 {
+        fill: #f5f4f8;
+      }
+
+      .cls-13 {
+        filter: url(#Ellipse_21);
+      }
+    </style>
+    <filter id="Ellipse_21" x="327.5" y="131.5" width="55" height="55" filterUnits="userSpaceOnUse">
+      <feOffset dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="328" height="282"/>
+    </clipPath>
+    <clipPath id="clip-iPhone_6_7_8_2">
+      <rect width="375" height="667"/>
+    </clipPath>
+  </defs>
+  <g id="iPhone_6_7_8_2" data-name="iPhone 6/7/8 – 2" class="cls-2">
+    <rect class="cls-8" width="375" height="667"/>
+    <g id="App_Bar_Top_App_Bar_Regular_Flat_Primary_Color" data-name="App Bar / Top App Bar / Regular / Flat / Primary Color" transform="translate(-80 -1002)">
+      <path id="Surface" class="cls-3" d="M75-1383H450v-56H75Z" transform="translate(5 2441)"/>
+      <text id="Create_Speaker_Ballot" data-name="Create Speaker Ballot" class="cls-4" transform="translate(152 1036)"><tspan x="0" y="0">Create Speaker Ballot</tspan></text>
+    </g>
+    <g id="Text_Field_Filled_Trailing_Icon_Activated" data-name="Text Field / Filled / Trailing Icon / Activated" transform="translate(-630 -231)">
+      <path id="Surface-2" data-name="Surface" class="cls-5" d="M17.359,0H310.641C320.228,0,328,8.507,328,19V37c0,10.493-7.772,19-17.359,19H17.359C7.772,56,0,47.493,0,37V19C0,8.507,7.772,0,17.359,0Z" transform="translate(630 358)"/>
+      <rect id="Selected" class="cls-3" width="328" height="2" transform="translate(630 412)"/>
+      <text id="Input_text" data-name="Input text" class="cls-6" transform="translate(646 397)"><tspan x="0" y="0">Input text</tspan></text>
+      <text id="Assistive_text" data-name="Assistive text" class="cls-7" transform="translate(646 429)"><tspan x="0" y="0">Assistive text</tspan></text>
+      <text id="Label" class="cls-7" transform="translate(646 377)"><tspan x="0" y="0">Label</tspan></text>
+      <rect id="Input" class="cls-3" width="1" height="17" transform="translate(645 384)"/>
+      <g id="FAB_Mini_Circular_Primary_Color_Enabled" data-name="FAB / Mini / Circular / Primary Color / Enabled" transform="translate(885 -206)">
+        <g class="cls-13" transform="matrix(1, 0, 0, 1, -255, 437)">
+          <circle id="Ellipse_21-2" data-name="Ellipse 21" class="cls-3" cx="20" cy="20" r="20" transform="translate(335 135)"/>
+        </g>
+        <g id="Icon_Add_Filled" data-name="Icon / Add / Filled">
+          <rect id="Box" class="cls-1" width="24" height="24" transform="translate(88 580)"/>
+          <path id="_" data-name="+" class="cls-8" d="M-6667,567v-6h-6v-2h6v-6h2v6h6v2h-6v6Z" transform="translate(6766 32)"/>
+        </g>
+      </g>
+    </g>
+    <g id="Text_Field_Filled_Trailing_Icon_Focused" data-name="Text Field / Filled / Trailing Icon / Focused" transform="translate(-78 -416)">
+      <g id="Repeat_Grid_8" data-name="Repeat Grid 8" class="cls-9" transform="translate(94 682)">
+        <g transform="translate(-94 -682)">
+          <path id="Surface-3" data-name="Surface" class="cls-10" d="M4,0H324a4,4,0,0,1,4,4V56a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(94 682)"/>
+        </g>
+        <g transform="translate(-94 -606)">
+          <path id="Surface-4" data-name="Surface" class="cls-10" d="M4,0H324a4,4,0,0,1,4,4V56a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(94 682)"/>
+        </g>
+        <g transform="translate(-94 -530)">
+          <path id="Surface-5" data-name="Surface" class="cls-10" d="M4,0H324a4,4,0,0,1,4,4V56a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(94 682)"/>
+        </g>
+        <g transform="translate(-94 -454)">
+          <path id="Surface-6" data-name="Surface" class="cls-10" d="M4,0H324a4,4,0,0,1,4,4V56a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(94 682)"/>
+        </g>
+      </g>
+      <text id="Candidate_1" data-name="Candidate 1" class="cls-11" transform="translate(117 713)"><tspan x="0" y="0">Candidate 1</tspan></text>
+      <text id="Candidate_3" data-name="Candidate 3" class="cls-11" transform="translate(117 868)"><tspan x="0" y="0">Candidate 3</tspan></text>
+      <text id="Candidate_4" data-name="Candidate 4" class="cls-11" transform="translate(117 945)"><tspan x="0" y="0">Candidate 4</tspan></text>
+    </g>
+    <text id="Candidate_2" data-name="Candidate 2" class="cls-11" transform="translate(37 374)"><tspan x="0" y="0">Candidate 2</tspan></text>
+    <text id="_2" data-name="&lt;==" class="cls-12" transform="translate(6 33)"><tspan x="0" y="0">&lt;==</tspan></text>
+  </g>
+</svg>

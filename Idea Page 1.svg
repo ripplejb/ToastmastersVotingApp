@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 375 667">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-iPhone_6_7_8_1);
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-10, .cls-4 {
+        fill: #6100ed;
+      }
+
+      .cls-11, .cls-5, .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        font-size: 14px;
+        letter-spacing: 0.089em;
+      }
+
+      .cls-10, .cls-5, .cls-6, .cls-9 {
+        font-family: SegoeUI, Segoe UI;
+      }
+
+      .cls-6 {
+        font-size: 20px;
+        letter-spacing: 0.013em;
+      }
+
+      .cls-7 {
+        fill: #873df2;
+      }
+
+      .cls-8 {
+        opacity: 0.07;
+      }
+
+      .cls-9 {
+        fill: rgba(0,0,0,0.87);
+        font-size: 16px;
+        letter-spacing: 0.009em;
+      }
+
+      .cls-10 {
+        font-size: 12px;
+        letter-spacing: 0.034em;
+      }
+
+      .cls-12 {
+        filter: url(#Ellipse_21);
+      }
+
+      .cls-13 {
+        filter: url(#Rectangle_377);
+      }
+
+      .cls-14 {
+        filter: url(#Path_2-3);
+      }
+
+      .cls-15 {
+        filter: url(#Path_2-2);
+      }
+
+      .cls-16 {
+        filter: url(#Path_2);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" width="356" height="164"/>
+    </clipPath>
+    <filter id="Path_2" x="5.5" y="141.5" width="365" height="59" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_2-2" x="5.5" y="197.5" width="365" height="59" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur-2"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_2-3" x="5.5" y="253.5" width="365" height="59" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur-3"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_377" x="267.5" y="7.5" width="102" height="45" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur-4"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_21" x="771.5" y="130.5" width="55" height="55" filterUnits="userSpaceOnUse">
+      <feOffset dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur-5"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-iPhone_6_7_8_1">
+      <rect width="375" height="667"/>
+    </clipPath>
+  </defs>
+  <g id="iPhone_6_7_8_1" data-name="iPhone 6/7/8 – 1" class="cls-2">
+    <rect class="cls-11" width="375" height="667"/>
+    <g id="Buttons_Contained_Enabled" data-name="Buttons / Contained / Enabled" transform="translate(-16 -244)">
+      <g id="Repeat_Grid_7" data-name="Repeat Grid 7" class="cls-3" transform="translate(26 389)">
+        <g transform="translate(-26 -395)">
+          <g class="cls-16" transform="matrix(1, 0, 0, 1, 16, 250)">
+            <path id="Path_2-4" data-name="Path 2" class="cls-4" d="M4,0H352a4,4,0,0,1,4,4V46a4,4,0,0,1-4,4H4a4,4,0,0,1-4-4V4A4,4,0,0,1,4,0Z" transform="translate(10 145)"/>
+          </g>
+        </g>
+        <g transform="translate(-26 -339)">
+          <g class="cls-15" transform="matrix(1, 0, 0, 1, 16, 194)">
+            <path id="Path_2-5" data-name="Path 2" class="cls-4" d="M4,0H352a4,4,0,0,1,4,4V46a4,4,0,0,1-4,4H4a4,4,0,0,1-4-4V4A4,4,0,0,1,4,0Z" transform="translate(10 201)"/>
+          </g>
+        </g>
+        <g transform="translate(-26 -283)">
+          <g class="cls-14" transform="matrix(1, 0, 0, 1, 16, 138)">
+            <path id="Path_2-6" data-name="Path 2" class="cls-4" d="M4,0H352a4,4,0,0,1,4,4V46a4,4,0,0,1-4,4H4a4,4,0,0,1-4-4V4A4,4,0,0,1,4,0Z" transform="translate(10 257)"/>
+          </g>
+        </g>
+      </g>
+      <text id="Create_Speakers_Ballot" data-name="Create Speakers Ballot" class="cls-5" transform="translate(204 419)"><tspan x="-81.994" y="0">Create Speakers Ballot</tspan></text>
+      <text id="Create_Table_Topic_Ballot" data-name="Create Table Topic Ballot" class="cls-5" transform="translate(204 530)"><tspan x="-90.226" y="0">Create Table Topic Ballot</tspan></text>
+    </g>
+    <text id="Create_Evaluator_Ballot" data-name="Create Evaluator Ballot" class="cls-5" transform="translate(188 228)"><tspan x="-83.598" y="0">Create Evaluator Ballot</tspan></text>
+    <g id="App_Bar_Top_App_Bar_Regular_Flat_Primary_Color" data-name="App Bar / Top App Bar / Regular / Flat / Primary Color" transform="translate(-80 -1002)">
+      <path id="Surface" class="cls-4" d="M75-1383H450v-56H75Z" transform="translate(5 2441)"/>
+      <text id="Create_Ballots" data-name="Create Ballots" class="cls-6" transform="translate(152 1036)"><tspan x="0" y="0">Create Ballots</tspan></text>
+    </g>
+    <g id="Buttons_Contained_Focused" data-name="Buttons / Contained / Focused" transform="translate(-216 -347)">
+      <g class="cls-13" transform="matrix(1, 0, 0, 1, 216, 347)">
+        <rect id="Rectangle_377-2" data-name="Rectangle 377" class="cls-7" width="93" height="36" rx="4" transform="translate(272 11)"/>
+      </g>
+      <text id="Clear_All" data-name="Clear All" class="cls-5" transform="translate(504 381)"><tspan x="0" y="0">Clear All</tspan></text>
+    </g>
+    <g id="Text_Field_Filled_Trailing_Icon_Activated" data-name="Text Field / Filled / Trailing Icon / Activated" transform="translate(-186 -232)">
+      <path id="Surface-2" data-name="Surface" class="cls-8" d="M17.359,0H310.641C320.228,0,328,8.507,328,19V37c0,10.493-7.772,19-17.359,19H17.359C7.772,56,0,47.493,0,37V19C0,8.507,7.772,0,17.359,0Z" transform="translate(630 358)"/>
+      <rect id="Selected" class="cls-4" width="328" height="2" transform="translate(630 412)"/>
+      <text id="Input_text" data-name="Input text" class="cls-9" transform="translate(646 397)"><tspan x="0" y="0">Input text</tspan></text>
+      <text id="Assistive_text" data-name="Assistive text" class="cls-10" transform="translate(646 429)"><tspan x="0" y="0">Assistive text</tspan></text>
+      <text id="Label" class="cls-10" transform="translate(646 377)"><tspan x="0" y="0">Label</tspan></text>
+      <rect id="Input" class="cls-4" width="1" height="17" transform="translate(645 384)"/>
+      <g id="FAB_Mini_Circular_Primary_Color_Enabled" data-name="FAB / Mini / Circular / Primary Color / Enabled" transform="translate(885 -206)">
+        <g class="cls-12" transform="matrix(1, 0, 0, 1, -699, 438)">
+          <circle id="Ellipse_21-2" data-name="Ellipse 21" class="cls-4" cx="20" cy="20" r="20" transform="translate(779 134)"/>
+        </g>
+        <g id="Icon_Add_Filled" data-name="Icon / Add / Filled">
+          <rect id="Box" class="cls-1" width="24" height="24" transform="translate(88 580)"/>
+          <path id="_" data-name="+" class="cls-11" d="M-6667,567v-6h-6v-2h6v-6h2v6h6v2h-6v6Z" transform="translate(6766 32)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
