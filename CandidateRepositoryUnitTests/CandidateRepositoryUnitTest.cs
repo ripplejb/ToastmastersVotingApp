@@ -43,17 +43,14 @@ namespace CandidateRepositoryUnitTests
                 // Act
                 await repository.AddAsync(new Candidate()
                 {
-                    Id = 1,
                     Name = "Ripal Barot"
                 });
                 await repository.AddAsync(new Candidate()
                 {
-                    Id = 2,
                     Name = "Falguni Barot"
                 });
                 await repository.AddAsync(new Candidate()
                 {
-                    Id = 3,
                     Name = "Neil Barot"
                 });
 
@@ -76,12 +73,10 @@ namespace CandidateRepositoryUnitTests
                     // Act
                     await repository.AddAsync(new Candidate()
                     {
-                        Id = 1,
                         Name = "Jashavant Barot"
                     });
                     await repository.AddAsync(new Candidate()
                     {
-                        Id = 2,
                         Name = "Jashavant Barot"
                     });
                     
@@ -99,12 +94,11 @@ namespace CandidateRepositoryUnitTests
                 var repository = new CandidateRepository(context);
                 var candidate = new Candidate
                 {
-                    Id = 1,
                     Name = "Ripal Barot"
                 };
                 
                 // Act
-                await repository.AddAsync(candidate);
+                candidate = await repository.AddAsync(candidate);
                 candidate.Name = "Anila Barot";
                 await repository.UpdateAsync(candidate);
 
