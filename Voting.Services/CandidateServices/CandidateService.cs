@@ -36,4 +36,6 @@ namespace Voting.Services.CandidateServices
 
         #endregion
 
-    }}
+    }
+    
+}
