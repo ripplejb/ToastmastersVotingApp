@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Voting.Services\Voting.Services.csproj" />
       <ProjectReference Include="..\VotingRepositories\VotingRepositories.csproj" />
     </ItemGroup>
 

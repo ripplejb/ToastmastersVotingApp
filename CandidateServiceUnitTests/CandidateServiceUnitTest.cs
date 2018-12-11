@@ -1,6 +1,6 @@
-using System;
 using Moq;
 using Voting.ServiceContracts.Models;
+using Voting.Services.CandidateServices;
 using VotingRepositories.CandidateRepositories;
 using Xunit;
 
@@ -43,16 +43,10 @@ namespace CandidateServiceUnitTests
             var candidate = new Candidate()
             {
                 Id = 1,
-                Name = "Ripal Barot"
+                Name = "Neil Barot"
             };
 
             var localCandidate = candidate;
-            mock.Setup(repo => repo.AddAsync(localCandidate)).ReturnsAsync(new Candidate()
-            {
-                Id = 1,
-                Name = "Ripal Barot"
-            });
-
             mock.Setup(repo => repo.UpdateAsync(localCandidate)).ReturnsAsync(new Candidate()
             {
                 Id = 1,
@@ -62,9 +56,6 @@ namespace CandidateServiceUnitTests
             ICandidateService candidateService = new CandidateService(mock.Object);
 
             // Act
-            candidate = await candidateService.AddAsync(candidate);
-            candidate.Name = "Neil Barot";
-
             candidate = await candidateService.UpdateAsync(candidate);
 
             // Assert

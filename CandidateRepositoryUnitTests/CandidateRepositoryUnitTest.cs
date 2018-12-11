@@ -57,6 +57,7 @@ namespace CandidateRepositoryUnitTests
                 // Assert
 
                 Assert.Equal(3, context.Candidates.Count());
+                
                 Assert.Equal("Neil Barot",
                     context.Candidates.Where(c => c.Name == "Neil Barot").Select(c => c.Name).FirstOrDefault());
             }
