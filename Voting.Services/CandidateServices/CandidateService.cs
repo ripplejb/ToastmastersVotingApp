@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
+using Voting.Services.Exceptions;
 using VotingRepositories.CandidateRepositories;
 
 namespace Voting.Services.CandidateServices
@@ -31,7 +32,9 @@ namespace Voting.Services.CandidateServices
 
         public async Task<Candidate> UpdateAsync(Candidate candidate)
         {
-            return await _candidateRepository.UpdateAsync(candidate);
+            var result = await _candidateRepository.UpdateAsync(candidate);
+            if (result == null) throw new RecordNotFoundException<Candidate>();
+            return result;
         }
 
         #endregion
