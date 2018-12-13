@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Moq;
+using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 using Voting.Services.CandidateServices;
 using Voting.Services.Exceptions;
@@ -8,8 +13,38 @@ using Xunit;
 
 namespace CandidateServiceUnitTests
 {
+    
     public class CandidateServiceUnitTest
     {
+        
+        #region Private Methods
+
+        private List<Candidate> GetCandidateList()
+        {
+            return new List<Candidate>
+            {
+                new Candidate()
+                {
+                    Id = 1,
+                    Name = "Ripal"
+                },
+                new Candidate()
+                {
+                    Id = 2,
+                    Name = "Rizwan"
+                },
+                new Candidate()
+                {
+                    Id = 3,
+                    Name = "Jason"
+                }
+            };
+        }
+
+        #endregion
+
+        #region Public Methods
+
         [Fact]
         public async void CandidateCreateTest()
         {
@@ -64,7 +99,7 @@ namespace CandidateServiceUnitTests
 
             //Since we only added Id = 1. Therefor Id <> 1 should fail
             mock.Setup(repo => repo.UpdateAsync(It.Is<Candidate>(c => c.Id != 1)))
-                .Throws<RecordNotFoundException<Candidate>>();
+                .Throws<DbException<Candidate>>();
 
             ICandidateService candidateService = new CandidateService(mock.Object);
 
@@ -80,9 +115,132 @@ namespace CandidateServiceUnitTests
             };
 
             // Assert
-            await Assert.ThrowsAsync<RecordNotFoundException<Candidate>>(async () => await candidateService.UpdateAsync(candidate2));
+            await Assert.ThrowsAsync<DbException<Candidate>>(async () => await candidateService.UpdateAsync(candidate2));
             Assert.Equal("Neil Barot", candidate.Name);
             Assert.Equal(1, candidate.Id);
         }
+
+        [Fact]
+        public async void CandidateRemoveTest()
+        {
+            // Arrange
+            var candidates = GetCandidateList();
+
+            var removedCandidate = new Candidate
+            {
+                Id = 3,
+                Name = "Jason"
+            };
+
+            var mockRepo = new Mock<ICandidateRepository>();
+            mockRepo.Setup(m => m.RemoveAsync(It.IsAny<Candidate>()))
+                .ReturnsAsync((Candidate candidate) =>
+                {
+                    if (candidates.RemoveAll(e => e.Id == candidate.Id) > 0)
+                        return candidate;
+                    else
+                    {
+                        throw new DbException<Candidate>();
+                    }
+                });
+            
+            var candidateService = new CandidateService(mockRepo.Object);
+            
+            // Act
+            await candidateService.RemoveAsync(removedCandidate);
+            
+            // Assert
+            Assert.Equal(2, candidates.Count);
+            await Assert.ThrowsAsync<DbException<Candidate>>(async () => await candidateService.RemoveAsync(removedCandidate));
+
+        }
+        
+        [Fact]
+        public async void CandidateSearchTest()
+        {
+            // Arrange
+            var candidates = GetCandidateList();
+
+            var searchRequest = new CandidateSearchRequest
+            {
+                Name = "Jason"
+            };
+
+            var mockRepo = new Mock<ICandidateRepository>();
+            mockRepo.Setup(m => m.SearchAsync(It.IsAny<CandidateSearchRequest>()))
+                .ReturnsAsync((CandidateSearchRequest request) =>
+                {
+                    return candidates.FindAll(e => e.Name == request.Name);
+                });
+            
+            var candidateService = new CandidateService(mockRepo.Object);
+            
+            // Act
+            var res = await candidateService.SearchAsync(searchRequest);
+            
+            // Assert
+            Assert.Equal(1, res.ToList().Count);
+
+        }
+        
+        [Fact]
+        public async void CandidateSearchTest2()
+        {
+            // Arrange
+            var candidates = GetCandidateList();
+
+            var searchRequest = new CandidateSearchRequest
+            {
+                Id = 2
+            };
+
+            var mockRepo = new Mock<ICandidateRepository>();
+            mockRepo.Setup(m => m.SearchAsync(It.IsAny<CandidateSearchRequest>()))
+                .ReturnsAsync((CandidateSearchRequest request) =>
+                {
+                    return candidates.FindAll(e => e.Id == request.Id);
+                });
+            
+            var candidateService = new CandidateService(mockRepo.Object);
+            
+            // Act
+            var res = await candidateService.SearchAsync(searchRequest);
+            
+            // Assert
+            Assert.Equal("Rizwan", res.First().Name);
+
+        }
+
+        [Fact]
+        public async void CandidateSearchTest3()
+        {
+            // Arrange
+            var candidates = GetCandidateList();
+
+            var searchRequest = new CandidateSearchRequest
+            {
+                Id = 4
+            };
+
+            var mockRepo = new Mock<ICandidateRepository>();
+            mockRepo.Setup(m => m.SearchAsync(It.IsAny<CandidateSearchRequest>()))
+                .ReturnsAsync((CandidateSearchRequest request) =>
+                {
+                    return candidates.FindAll(e => e.Id == request.Id);
+                });
+            
+            var candidateService = new CandidateService(mockRepo.Object);
+            
+            // Act
+            var res = await candidateService.SearchAsync(searchRequest);
+            
+            // Assert
+            Assert.Null(res.FirstOrDefault());
+
+        }
+
+        #endregion
+        
+        
     }
 }

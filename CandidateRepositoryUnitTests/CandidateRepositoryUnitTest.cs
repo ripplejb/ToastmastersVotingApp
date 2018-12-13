@@ -111,6 +111,33 @@ namespace CandidateRepositoryUnitTests
         }
         
         [Fact]
+        public async void UpdateTestAsync2()
+        {
+            // Arrange
+            using (var context = new VotingContext(GetDbContextOptions()))
+            {
+                var repository = new CandidateRepository(context);
+                var candidate = new Candidate
+                {
+                    Name = "Ripal Barot"
+                };
+                
+                // Act
+                candidate = await repository.AddAsync(candidate);
+                candidate = new Candidate()
+                {
+                    Id = 3,
+                    Name = "Anila Barot"
+                };
+
+                var exception = await Record.ExceptionAsync(async () => await repository.UpdateAsync(candidate));
+                // Assert
+                Assert.NotNull(exception);
+                
+            }
+        }
+
+        [Fact]
         public async void RemoveTestAsync()
         {
             // Arrange
