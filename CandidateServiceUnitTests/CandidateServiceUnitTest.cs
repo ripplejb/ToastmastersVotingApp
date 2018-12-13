@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using Moq;
-using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 using Voting.Services.CandidateServices;
 using Voting.Services.Exceptions;
@@ -240,7 +236,6 @@ namespace CandidateServiceUnitTests
         }
 
         #endregion
-        
-        
+     
     }
 }
