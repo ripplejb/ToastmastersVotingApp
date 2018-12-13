@@ -179,62 +179,6 @@ namespace CandidateServiceUnitTests
 
         }
         
-        [Fact]
-        public async void CandidateSearchTest2()
-        {
-            // Arrange
-            var candidates = GetCandidateList();
-
-            var searchRequest = new CandidateSearchRequest
-            {
-                Id = 2
-            };
-
-            var mockRepo = new Mock<ICandidateRepository>();
-            mockRepo.Setup(m => m.SearchAsync(It.IsAny<CandidateSearchRequest>()))
-                .ReturnsAsync((CandidateSearchRequest request) =>
-                {
-                    return candidates.FindAll(e => e.Id == request.Id);
-                });
-            
-            var candidateService = new CandidateService(mockRepo.Object);
-            
-            // Act
-            var res = await candidateService.SearchAsync(searchRequest);
-            
-            // Assert
-            Assert.Equal("Rizwan", res.First().Name);
-
-        }
-
-        [Fact]
-        public async void CandidateSearchTest3()
-        {
-            // Arrange
-            var candidates = GetCandidateList();
-
-            var searchRequest = new CandidateSearchRequest
-            {
-                Id = 4
-            };
-
-            var mockRepo = new Mock<ICandidateRepository>();
-            mockRepo.Setup(m => m.SearchAsync(It.IsAny<CandidateSearchRequest>()))
-                .ReturnsAsync((CandidateSearchRequest request) =>
-                {
-                    return candidates.FindAll(e => e.Id == request.Id);
-                });
-            
-            var candidateService = new CandidateService(mockRepo.Object);
-            
-            // Act
-            var res = await candidateService.SearchAsync(searchRequest);
-            
-            // Assert
-            Assert.Null(res.FirstOrDefault());
-
-        }
-
         #endregion
      
     }
