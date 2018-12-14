@@ -175,7 +175,7 @@ namespace CandidateServiceUnitTests
             var res = await candidateService.SearchAsync(searchRequest);
             
             // Assert
-            Assert.Equal(1, res.ToList().Count);
+            Assert.Single(res.ToList());
 
         }
         
