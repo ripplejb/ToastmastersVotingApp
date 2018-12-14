@@ -1,6 +1,5 @@
 using System.Linq;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+using UnitTestDbContextOptionProvider;
 using Xunit;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
@@ -10,32 +9,11 @@ namespace CandidateRepositoryUnitTests
 {
     public class CandidateRepositoryUnitTest
     {
-        #region Private Methods
-
-        private DbContextOptions<VotingContext> GetDbContextOptions()
-        {
-            var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
-
-            var options = new DbContextOptionsBuilder<VotingContext>()
-                .UseSqlite(connection)
-                .Options;
-
-            using (var context = new VotingContext(options))
-            {
-                context.Database.EnsureCreated();
-            }
-
-            return options;
-        }
-
-        #endregion
-
         [Fact]
         public async void CreateTestAsync()
         {
             // Arrange
-            using (var context = new VotingContext(GetDbContextOptions()))
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
                 var repository = new CandidateRepository(context);
 
@@ -66,7 +44,7 @@ namespace CandidateRepositoryUnitTests
         public async void DuplicateAllowedTestAsync()
         {
                 // Arrange
-                using (var context = new VotingContext(GetDbContextOptions()))
+                using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
                 {
                     var repository = new CandidateRepository(context);
 
@@ -89,7 +67,7 @@ namespace CandidateRepositoryUnitTests
         public async void UpdateTestAsync()
         {
             // Arrange
-            using (var context = new VotingContext(GetDbContextOptions()))
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
                 var repository = new CandidateRepository(context);
                 var candidate = new Candidate
@@ -113,7 +91,7 @@ namespace CandidateRepositoryUnitTests
         public async void UpdateTestAsync2()
         {
             // Arrange
-            using (var context = new VotingContext(GetDbContextOptions()))
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
                 var repository = new CandidateRepository(context);
                 var candidate = new Candidate
@@ -140,7 +118,7 @@ namespace CandidateRepositoryUnitTests
         public async void RemoveTestAsync()
         {
             // Arrange
-            using (var context = new VotingContext(GetDbContextOptions()))
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
                 var repository = new CandidateRepository(context);
                 var candidate = new Candidate
@@ -167,7 +145,7 @@ namespace CandidateRepositoryUnitTests
         public async void RemoveAfterChangeTestAsync()
         {
             // Arrange
-            using (var context = new VotingContext(GetDbContextOptions()))
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
                 var repository = new CandidateRepository(context);
                 var candidate = new Candidate
@@ -192,7 +170,7 @@ namespace CandidateRepositoryUnitTests
         public async void SearchTestAsync()
         {
             // Arrange
-            using (var context = new VotingContext(GetDbContextOptions()))
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
                 var repository = new CandidateRepository(context);
 
@@ -226,7 +204,7 @@ namespace CandidateRepositoryUnitTests
         public async void GetByIdTestAsync()
         {
             // Arrange
-            using (var context = new VotingContext(GetDbContextOptions()))
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
                 var repository = new CandidateRepository(context);
 
