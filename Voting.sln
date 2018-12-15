@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionRepositoryUnitTests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestDbContextOptionProvider", "UnitTestDbContextOptionProvider\UnitTestDbContextOptionProvider.csproj", "{C7264294-0D66-482D-974F-2FC0F079976B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionServiceUnitTests", "ElectionServiceUnitTests\ElectionServiceUnitTests.csproj", "{9E2ACB5D-76EC-4F09-9D62-1934737DB803}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{C7264294-0D66-482D-974F-2FC0F079976B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7264294-0D66-482D-974F-2FC0F079976B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7264294-0D66-482D-974F-2FC0F079976B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E2ACB5D-76EC-4F09-9D62-1934737DB803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E2ACB5D-76EC-4F09-9D62-1934737DB803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E2ACB5D-76EC-4F09-9D62-1934737DB803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E2ACB5D-76EC-4F09-9D62-1934737DB803}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

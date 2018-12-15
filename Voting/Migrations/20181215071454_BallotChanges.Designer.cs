@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Voting.ServiceContracts.DbContexts;
 
 namespace Voting.Migrations
 {
     [DbContext(typeof(VotingContext))]
-    partial class BallotContextModelSnapshot : ModelSnapshot
+    [Migration("20181215071454_BallotChanges")]
+    partial class BallotChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

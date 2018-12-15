@@ -12,5 +12,6 @@ namespace Voting.ServiceContracts.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
+        private Election Election { get; set; }
     }
 }
