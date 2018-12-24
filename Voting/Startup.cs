@@ -30,8 +30,11 @@ namespace Voting
         {
             services.AddMvc();
             services.AddDbContext<VotingContext>(
-                options => options.UseSqlServer(
-                    _configuration.GetConnectionString("SqlServer"), 
+//                options => options.UseSqlServer(
+//                    _configuration.GetConnectionString("SqlServer"), 
+//                    b => b.MigrationsAssembly("Voting")
+                options => options.UseNpgsql(
+                    _configuration.GetConnectionString("pgSQL"), 
                     b => b.MigrationsAssembly("Voting")
                     )
                 );
