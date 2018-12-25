@@ -84,7 +84,6 @@ namespace ElectionServiceUnitTests
             // Arrange
             var mockElectionRepository = GetElectionRepositoryMock();
             var deleteElectionSetup = new RemoveElectionSetup();
-            deleteElectionSetup.SetupMock(mockElectionRepository);
 
             var election = new Election()
             {
@@ -95,12 +94,20 @@ namespace ElectionServiceUnitTests
                 ExpirationDate = DateTime.Now.Add(new TimeSpan(7, 0, 0, 0))
             };
 
+            Election repoResult = election;
+
+            deleteElectionSetup.SetupMock(mockElectionRepository, 
+                (e) => { 
+                repoResult = e;
+                return e;
+            });
             var electionService = new ElectionService(mockElectionRepository.Object, null);
             
             // Act
             Election result = await electionService.RemoveAsync(election);
             
             // Assert
+            Assert.Same(repoResult, result);
             Assert.True(result.Id == 1);
         }
         
