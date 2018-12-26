@@ -7,6 +7,7 @@ using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using Voting.Services.ElectionServices;
 using VotingRepositories.ElectionRepositories;
+using VotingRepositories.ElectionRepositories.Savers;
 using Xunit;
 
 namespace ElectionServiceUnitTests
@@ -21,9 +22,9 @@ namespace ElectionServiceUnitTests
             return new Mock<IBallotService>();
         }
 
-        private Mock<IElectionRepository> GetElectionRepositoryMock()
+        private Mock<IElectionSaver> GetElectionRepositoryMock()
         {
-            return new Mock<IElectionRepository>();
+            return new Mock<IElectionSaver>();
         }
         
         #endregion

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using VotingRepositories.ElectionRepositories;
+using VotingRepositories.ElectionRepositories.Savers;
 
 namespace Voting.Services.ElectionServices
 {
@@ -10,16 +11,16 @@ namespace Voting.Services.ElectionServices
     {
         #region Private Member Variables
 
-        private readonly IElectionRepository _electionRepository;
+        private readonly IElectionSaver _electionSaver;
         private readonly IBallotService _ballotService;
 
         #endregion
         
         #region Constructors
 
-        public ElectionService(IElectionRepository electionRepository, IBallotService ballotService)
+        public ElectionService(IElectionSaver electionSaver, IBallotService ballotService)
         {
-            _electionRepository = electionRepository;
+            _electionSaver = electionSaver;
             _ballotService = ballotService;
         }
 
@@ -35,13 +36,13 @@ namespace Voting.Services.ElectionServices
 
         public async Task<Election> AddAsync(Election election)
         {
-            election = await _electionRepository.AddAsync(election);
+            election = await _electionSaver.AddAsync(election);
             return election;
         }
 
         public async Task<Election> RemoveAsync(Election election)
         {
-            return await _electionRepository.RemoveAsync(election);
+            return await _electionSaver.RemoveAsync(election);
         }
 
         #endregion

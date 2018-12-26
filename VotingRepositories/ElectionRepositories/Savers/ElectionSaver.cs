@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 
-namespace VotingRepositories.ElectionRepositories
+namespace VotingRepositories.ElectionRepositories.Savers
 {
-    public class ElectionRepository : IElectionRepository
+    public class ElectionSaver : IElectionSaver
     {
         #region Private Member Variables
 
@@ -14,7 +14,7 @@ namespace VotingRepositories.ElectionRepositories
 
         #region Constructors
 
-        public ElectionRepository(VotingContext context)
+        public ElectionSaver(VotingContext context)
         {
             _votingContext = context;
         }

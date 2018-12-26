@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
 using Voting.Services.Exceptions;
 using VotingRepositories.CandidateRepositories;
+using VotingRepositories.CandidateRepositories.Builders;
+using VotingRepositories.CandidateRepositories.Savers;
 
 namespace Voting.Services.CandidateServices
 {
@@ -11,15 +13,17 @@ namespace Voting.Services.CandidateServices
     {
         #region Private Member Variables
 
-        private readonly ICandidateRepository _candidateRepository;
+        private readonly ICandidateBuilder _candidateBuilder;
+        private readonly ICandidateSaver _candidateSaver;
 
         #endregion
 
         #region Constructors
 
-        public CandidateService(ICandidateRepository candidateRepository)
+        public CandidateService(ICandidateBuilder candidateRepository, ICandidateSaver candidateSaver)
         {
-            _candidateRepository = candidateRepository;
+            _candidateBuilder = candidateRepository;
+            _candidateSaver = candidateSaver;
         }
 
         #endregion
@@ -30,7 +34,7 @@ namespace Voting.Services.CandidateServices
         {
             try
             {
-                return await _candidateRepository.AddAsync(candidate);
+                return await _candidateSaver.AddAsync(candidate);
             }
             catch (Exception e)
             {
@@ -43,7 +47,7 @@ namespace Voting.Services.CandidateServices
         {
             try
             {
-                return await _candidateRepository.UpdateAsync(candidate);
+                return await _candidateSaver.UpdateAsync(candidate);
             }
             catch (Exception e)
             {
@@ -56,7 +60,7 @@ namespace Voting.Services.CandidateServices
         {
             try
             {
-                return await _candidateRepository.RemoveAsync(candidate);
+                return await _candidateSaver.RemoveAsync(candidate);
             }
             catch (Exception e)
             {
@@ -67,7 +71,7 @@ namespace Voting.Services.CandidateServices
 
         public async Task<IEnumerable<Candidate>> SearchAsync(CandidateSearchRequest candidateSearchRequest)
         {
-            return await _candidateRepository.SearchAsync(candidateSearchRequest);
+            return await _candidateBuilder.SearchAsync(candidateSearchRequest);
         }
 
         #endregion

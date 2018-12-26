@@ -5,6 +5,7 @@ using UnitTestDbContextOptionProvider;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 using VotingRepositories.ElectionRepositories;
+using VotingRepositories.ElectionRepositories.Savers;
 using Xunit;
 
 namespace ElectionRepositoryUnitTests
@@ -18,22 +19,22 @@ namespace ElectionRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                IElectionRepository repository = new ElectionRepository(context);
+                IElectionSaver saver = new ElectionSaver(context);
 
                 // Act
-                await repository.AddAsync(new Election()
+                await saver.AddAsync(new Election()
                 {
                     ElectionQr = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     ExpirationDate = DateTime.Now.Add(new TimeSpan(5,0,0,0))
                 });
-                await repository.AddAsync(new Election()
+                await saver.AddAsync(new Election()
                 {
                     ElectionQr = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     ExpirationDate = DateTime.Now.Add(new TimeSpan(5,0,0,0))
                 });
-                await repository.AddAsync(new Election()
+                await saver.AddAsync(new Election()
                 {
                     ElectionQr = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
@@ -53,7 +54,7 @@ namespace ElectionRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                IElectionRepository repository = new ElectionRepository(context);
+                IElectionSaver saver = new ElectionSaver(context);
 
                 // Act
                 var election1 = new Election
@@ -62,10 +63,10 @@ namespace ElectionRepositoryUnitTests
                     CreatedDate = DateTime.Now,
                     ExpirationDate = DateTime.Now.Add(new TimeSpan(5, 0, 0, 0)),
                 };
-                election1 = await repository.AddAsync(election1);
+                election1 = await saver.AddAsync(election1);
 
                 // Assert
-                await repository.RemoveAsync(election1);
+                await saver.RemoveAsync(election1);
                 Assert.Empty(context.Elections);
             }
         }

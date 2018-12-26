@@ -5,6 +5,8 @@ using Voting.ServiceContracts.Models;
 using Voting.Services.CandidateServices;
 using Voting.Services.Exceptions;
 using VotingRepositories.CandidateRepositories;
+using VotingRepositories.CandidateRepositories.Builders;
+using VotingRepositories.CandidateRepositories.Savers;
 using Xunit;
 
 namespace CandidateServiceUnitTests
@@ -45,7 +47,7 @@ namespace CandidateServiceUnitTests
         public async void CandidateCreateTest()
         {
             // Arrange
-            var mock = new Mock<ICandidateRepository>();
+            var mock = new Mock<ICandidateSaver>();
             var candidate = new Candidate()
             {
                 Name = "Ripal Barot"
@@ -58,7 +60,7 @@ namespace CandidateServiceUnitTests
                 Name = "Ripal Barot"
             });
 
-            ICandidateService candidateService = new CandidateService(mock.Object);
+            ICandidateService candidateService = new CandidateService(null, mock.Object);
 
             // Act
             candidate = await candidateService.AddAsync(candidate);
@@ -72,7 +74,7 @@ namespace CandidateServiceUnitTests
         public async void CandidateUpdateTest()
         {
             // Arrange
-            var mock = new Mock<ICandidateRepository>();
+            var mock = new Mock<ICandidateSaver>();
             var candidate = new Candidate()
             {
                 Name = "Ripal Barot"
@@ -97,7 +99,7 @@ namespace CandidateServiceUnitTests
             mock.Setup(repo => repo.UpdateAsync(It.Is<Candidate>(c => c.Id != 1)))
                 .Throws<DbException<Candidate>>();
 
-            ICandidateService candidateService = new CandidateService(mock.Object);
+            ICandidateService candidateService = new CandidateService(null, mock.Object);
 
             // Act
             candidate = await candidateService.AddAsync(candidate);
@@ -128,7 +130,7 @@ namespace CandidateServiceUnitTests
                 Name = "Jason"
             };
 
-            var mockRepo = new Mock<ICandidateRepository>();
+            var mockRepo = new Mock<ICandidateSaver>();
             mockRepo.Setup(m => m.RemoveAsync(It.IsAny<Candidate>()))
                 .ReturnsAsync((Candidate candidate) =>
                 {
@@ -140,7 +142,7 @@ namespace CandidateServiceUnitTests
                     }
                 });
             
-            var candidateService = new CandidateService(mockRepo.Object);
+            var candidateService = new CandidateService(null, mockRepo.Object);
             
             // Act
             await candidateService.RemoveAsync(removedCandidate);
@@ -162,14 +164,14 @@ namespace CandidateServiceUnitTests
                 Name = "Jason"
             };
 
-            var mockRepo = new Mock<ICandidateRepository>();
+            var mockRepo = new Mock<ICandidateBuilder>();
             mockRepo.Setup(m => m.SearchAsync(It.IsAny<CandidateSearchRequest>()))
                 .ReturnsAsync((CandidateSearchRequest request) =>
                 {
                     return candidates.FindAll(e => e.Name == request.Name);
                 });
             
-            var candidateService = new CandidateService(mockRepo.Object);
+            var candidateService = new CandidateService(mockRepo.Object, null);
             
             // Act
             var res = await candidateService.SearchAsync(searchRequest);

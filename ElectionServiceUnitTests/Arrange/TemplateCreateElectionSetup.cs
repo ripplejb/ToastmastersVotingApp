@@ -3,12 +3,13 @@ using Moq;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using VotingRepositories.ElectionRepositories;
+using VotingRepositories.ElectionRepositories.Savers;
 
 namespace ElectionServiceUnitTests.Arrange
 {
     public class TemplateCreateElectionSetup
     {
-        public void SetupMock(Mock<IElectionRepository> mockElectionRepository,
+        public void SetupMock(Mock<IElectionSaver> mockElectionRepository,
             Mock<IBallotService> mockBallotService)
         {
             var mockList = new List<Ballot>()
