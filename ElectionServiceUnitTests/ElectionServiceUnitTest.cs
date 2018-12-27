@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ElectionServiceUnitTests.Arrange;
 using Moq;
 using Voting.ServiceContracts.Models;
@@ -113,14 +114,18 @@ namespace ElectionServiceUnitTests
         }
         
         [Fact]
-        public void RemoveAllExpiredElectionUnitTest()
+        public async void RemoveAllExpiredElectionUnitTest()
         {
             // Arrange
+            var mockRepo = GetElectionRepositoryMock();
+            var service = new ElectionService(mockRepo.Object, null);
             
             // Act
+            await service.RemoveAllExpiredElectionsAsync();
             
             // Assert
-            throw new NotImplementedException();
+            mockRepo.Verify((repo) => repo.RemoveAllExpiredElectionsAsync(), Times.Once());
+            
         }
 
         #endregion

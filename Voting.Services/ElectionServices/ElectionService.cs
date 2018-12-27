@@ -45,6 +45,11 @@ namespace Voting.Services.ElectionServices
             return await _electionSaver.RemoveAsync(election);
         }
 
+        public async Task RemoveAllExpiredElectionsAsync()
+        {
+            await _electionSaver.RemoveAllExpiredElectionsAsync();
+        }
+
         #endregion
     }
 }

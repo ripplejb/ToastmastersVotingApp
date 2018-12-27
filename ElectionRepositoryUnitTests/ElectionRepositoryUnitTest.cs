@@ -70,5 +70,15 @@ namespace ElectionRepositoryUnitTests
                 Assert.Empty(context.Elections);
             }
         }
+
+        [Fact]
+        public async void RemoveAllExpiredElectionsTestAsync()
+        {
+            // Arrange
+            
+            // Act
+            
+            // Assert
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace VotingRepositories.ElectionRepositories.Savers
     {
         Task<Election> AddAsync(Election election);
         Task<Election> RemoveAsync(Election election);
+        Task RemoveAllExpiredElectionsAsync();
     }
 }

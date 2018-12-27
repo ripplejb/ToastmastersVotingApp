@@ -37,6 +37,11 @@ namespace VotingRepositories.ElectionRepositories.Savers
             return result;
         }
 
+        public async Task RemoveAllExpiredElectionsAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
     }
 }
