@@ -22,5 +22,37 @@ namespace Voting.ServiceContracts.DbContexts
 
         #endregion
 
+        #region Protected Methods
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Election>()
+                .HasMany(i => i.Ballots)
+                .WithOne(b => b.Election)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BallotCandidate>()
+                .HasOne(b => b.Ballot)
+                .WithMany(b => b.BallotCandidates)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BallotCandidate>()
+                .HasKey(bc => new {bc.BallotId, bc.CandidateId});
+
+            modelBuilder.Entity<BallotCandidate>()
+                .HasOne(bc => bc.Ballot)
+                .WithMany(b => b.BallotCandidates)
+                .HasForeignKey(bc => bc.BallotId);
+
+            modelBuilder.Entity<BallotCandidate>()
+                .HasOne(bc => bc.Candidate)
+                .WithMany(c => c.BallotCandidates)
+                .HasForeignKey(bc => bc.CandidateId);
+        }
+
+        #endregion
+
     }
 }

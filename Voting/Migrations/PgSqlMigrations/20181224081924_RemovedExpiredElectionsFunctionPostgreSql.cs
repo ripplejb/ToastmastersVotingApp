@@ -66,7 +66,7 @@ namespace Voting.Migrations.PgSqlMigrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-          migrationBuilder.Sql("drop function RemoveExpiredElections;");
+          migrationBuilder.Sql("drop function if exists RemoveExpiredElections;");
         }
     }
 }

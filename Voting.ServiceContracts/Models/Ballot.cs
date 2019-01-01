@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,6 +13,7 @@ namespace Voting.ServiceContracts.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
-        private Election Election { get; set; }
+        public Election Election { get; set; }
+        public IEnumerable<BallotCandidate> BallotCandidates { get; set; }
     }
 }

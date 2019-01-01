@@ -10,7 +10,7 @@ using Xunit;
 
 namespace ElectionRepositoryUnitTests
 {
-    public class ElectionRepositoryUnitTest
+    public class ElectionSaverUnitTest
     {
         
         [Fact]
@@ -64,9 +64,9 @@ namespace ElectionRepositoryUnitTests
                     ExpirationDate = DateTime.Now.Add(new TimeSpan(5, 0, 0, 0)),
                 };
                 election1 = await saver.AddAsync(election1);
+                await saver.RemoveAsync(election1);
 
                 // Assert
-                await saver.RemoveAsync(election1);
                 Assert.Empty(context.Elections);
             }
         }
@@ -75,10 +75,33 @@ namespace ElectionRepositoryUnitTests
         public async void RemoveAllExpiredElectionsTestAsync()
         {
             // Arrange
-            
-            // Act
-            
-            // Assert
+            using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
+            {
+
+                IElectionSaver saver = new ElectionSaver(context);
+
+                await saver.AddAsync(new Election
+                {
+                    ElectionQr = Guid.NewGuid(),
+                    CreatedDate = DateTime.Now,
+                    ExpirationDate = DateTime.Now.Add(new TimeSpan(5, 0, 0, 0)),
+                });
+
+                await saver.AddAsync(new Election
+                {
+                    ElectionQr = Guid.NewGuid(),
+                    CreatedDate = DateTime.Now.Add(new TimeSpan(-15, 0, 0, 0)),
+                    ExpirationDate = DateTime.Now.Add(new TimeSpan(-10, 0, 0, 0)),
+                });
+
+                // Act
+                await saver.RemoveAllExpiredElectionsAsync();
+
+
+                // Assert
+                Assert.True(context.Elections.Count() == 1);
+                
+            }
         }
     }
 }

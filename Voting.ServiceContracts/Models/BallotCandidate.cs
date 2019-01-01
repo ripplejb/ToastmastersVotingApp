@@ -8,7 +8,10 @@ namespace Voting.ServiceContracts.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        public int CandidateId { get; set; }
         public Candidate Candidate { get; set; }
+        public int BallotId { get; set; }
         public Ballot Ballot { get; set; }
         public int VoteCount { get; set; }
     }

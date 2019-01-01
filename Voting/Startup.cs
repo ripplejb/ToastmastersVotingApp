@@ -29,15 +29,24 @@ namespace Voting
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<VotingContext>(
-//                options => options.UseSqlServer(
-//                    _configuration.GetConnectionString("SqlServer"), 
-//                    b => b.MigrationsAssembly("Voting")
-                options => options.UseNpgsql(
-                    _configuration.GetConnectionString("pgSQL"), 
+            if (_configuration.GetValue<string>("DatabaseConfig:DatabaseType") == "pgSql")
+            {
+                services.AddDbContext<VotingContext>(
+                    options => options.UseNpgsql(
+                        _configuration.GetConnectionString("pgSQL"),
+                        b => b.MigrationsAssembly("Voting")
+                    )
+                );
+            }
+            else if (_configuration.GetValue<string>("DatabaseConfig:DatabaseType") == "MSSql")
+            {
+                services.AddDbContext<VotingContext>(
+                options => options.UseSqlServer(
+                    _configuration.GetConnectionString("SqlServer"), 
                     b => b.MigrationsAssembly("Voting")
                     )
                 );
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

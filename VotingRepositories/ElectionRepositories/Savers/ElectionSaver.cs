@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
@@ -39,7 +41,9 @@ namespace VotingRepositories.ElectionRepositories.Savers
 
         public async Task RemoveAllExpiredElectionsAsync()
         {
-            throw new System.NotImplementedException();
+            var elections = _votingContext.Elections.Where(e => DateTime.Compare(e.ExpirationDate, DateTime.Now) < 0);
+            _votingContext.Elections.RemoveRange(elections);
+            await _votingContext.SaveChangesAsync();
         }
 
         #endregion

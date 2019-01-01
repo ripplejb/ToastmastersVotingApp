@@ -124,7 +124,7 @@ namespace ElectionServiceUnitTests
             await service.RemoveAllExpiredElectionsAsync();
             
             // Assert
-            mockRepo.Verify((repo) => repo.RemoveAllExpiredElectionsAsync(), Times.Once());
+            mockRepo.Verify((repo) => repo.RemoveAllExpiredElectionsAsync(), Times.Once);
             
         }
 
