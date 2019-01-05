@@ -32,24 +32,11 @@ namespace Voting.ServiceContracts.DbContexts
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<BallotCandidate>()
-                .HasOne(b => b.Ballot)
-                .WithMany(b => b.BallotCandidates)
+            modelBuilder.Entity<Ballot>()
+                .HasMany(bc => bc.BallotCandidates)
+                .WithOne(b => b.Ballot)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<BallotCandidate>()
-                .HasKey(bc => new {bc.BallotId, bc.CandidateId});
-
-            modelBuilder.Entity<BallotCandidate>()
-                .HasOne(bc => bc.Ballot)
-                .WithMany(b => b.BallotCandidates)
-                .HasForeignKey(bc => bc.BallotId);
-
-            modelBuilder.Entity<BallotCandidate>()
-                .HasOne(bc => bc.Candidate)
-                .WithMany(c => c.BallotCandidates)
-                .HasForeignKey(bc => bc.CandidateId);
         }
 
         #endregion
