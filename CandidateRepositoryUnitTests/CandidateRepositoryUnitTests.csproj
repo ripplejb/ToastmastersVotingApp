@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -18,8 +18,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\UnitTestDbContextOptionProvider\UnitTestDbContextOptionProvider.csproj" />
+      <ProjectReference Include="..\Voting.Repositories\Voting.Repositories.csproj" />
       <ProjectReference Include="..\Voting.ServiceContracts\Voting.ServiceContracts.csproj" />
-      <ProjectReference Include="..\VotingRepositories\VotingRepositories.csproj" />
     </ItemGroup>
 
     <ItemGroup>

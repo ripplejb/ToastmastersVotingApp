@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 
-namespace VotingRepositories.ElectionRepositories.Savers
+namespace Voting.Repositories.ElectionRepositories.Savers
 {
     public class ElectionSaver : IElectionSaver
     {

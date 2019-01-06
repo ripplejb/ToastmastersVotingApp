@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 
-namespace VotingRepositories.CandidateRepositories.Savers
+namespace Voting.Repositories.CandidateRepositories.Savers
 {
     public class CandidateSaver : ICandidateSaver
     {

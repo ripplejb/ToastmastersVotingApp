@@ -16,8 +16,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\UnitTestDbContextOptionProvider\UnitTestDbContextOptionProvider.csproj" />
+      <ProjectReference Include="..\Voting.Repositories\Voting.Repositories.csproj" />
       <ProjectReference Include="..\Voting.ServiceContracts\Voting.ServiceContracts.csproj" />
-      <ProjectReference Include="..\VotingRepositories\VotingRepositories.csproj" />
     </ItemGroup>
 
 </Project>

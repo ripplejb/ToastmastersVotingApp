@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -14,8 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Voting.Repositories\Voting.Repositories.csproj" />
       <ProjectReference Include="..\Voting.Services\Voting.Services.csproj" />
-      <ProjectReference Include="..\VotingRepositories\VotingRepositories.csproj" />
     </ItemGroup>
 
     <ItemGroup>

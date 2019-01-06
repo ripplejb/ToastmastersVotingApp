@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Moq;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
-using VotingRepositories.ElectionRepositories;
-using VotingRepositories.ElectionRepositories.Savers;
+using Voting.Repositories.ElectionRepositories;
+using Voting.Repositories.ElectionRepositories.Savers;
 
 namespace ElectionServiceUnitTests.Arrange
 {

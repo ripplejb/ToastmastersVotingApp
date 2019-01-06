@@ -7,8 +7,8 @@ using Microsoft.VisualStudio.TestPlatform.Common.DataCollection;
 using UnitTestDbContextOptionProvider;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
-using VotingRepositories.ElectionRepositories;
-using VotingRepositories.ElectionRepositories.Savers;
+using Voting.Repositories.ElectionRepositories;
+using Voting.Repositories.ElectionRepositories.Savers;
 using Xunit;
 
 namespace ElectionRepositoryUnitTests

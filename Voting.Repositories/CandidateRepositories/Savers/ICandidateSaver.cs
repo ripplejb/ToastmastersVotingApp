@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
 
-namespace VotingRepositories.CandidateRepositories.Savers
+namespace Voting.Repositories.CandidateRepositories.Savers
 {
     public interface ICandidateSaver
     {

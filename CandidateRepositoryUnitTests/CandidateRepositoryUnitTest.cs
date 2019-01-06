@@ -3,9 +3,9 @@ using UnitTestDbContextOptionProvider;
 using Xunit;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
-using VotingRepositories.CandidateRepositories;
-using VotingRepositories.CandidateRepositories.Builders;
-using VotingRepositories.CandidateRepositories.Savers;
+using Voting.Repositories.CandidateRepositories;
+using Voting.Repositories.CandidateRepositories.Builders;
+using Voting.Repositories.CandidateRepositories.Savers;
 
 namespace CandidateRepositoryUnitTests
 {

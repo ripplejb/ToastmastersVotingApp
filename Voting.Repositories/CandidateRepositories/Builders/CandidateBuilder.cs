@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 
-namespace VotingRepositories.CandidateRepositories.Builders
+namespace Voting.Repositories.CandidateRepositories.Builders
 {
     public class CandidateBuilder : ICandidateBuilder
     {

@@ -7,8 +7,8 @@ using Moq;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using Voting.Services.ElectionServices;
-using VotingRepositories.ElectionRepositories;
-using VotingRepositories.ElectionRepositories.Savers;
+using Voting.Repositories.ElectionRepositories;
+using Voting.Repositories.ElectionRepositories.Savers;
 using Xunit;
 
 namespace ElectionServiceUnitTests

@@ -4,9 +4,9 @@ using Moq;
 using Voting.ServiceContracts.Models;
 using Voting.Services.CandidateServices;
 using Voting.Services.Exceptions;
-using VotingRepositories.CandidateRepositories;
-using VotingRepositories.CandidateRepositories.Builders;
-using VotingRepositories.CandidateRepositories.Savers;
+using Voting.Repositories.CandidateRepositories;
+using Voting.Repositories.CandidateRepositories.Builders;
+using Voting.Repositories.CandidateRepositories.Savers;
 using Xunit;
 
 namespace CandidateServiceUnitTests

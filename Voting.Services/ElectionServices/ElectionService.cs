@@ -2,8 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
-using VotingRepositories.ElectionRepositories;
-using VotingRepositories.ElectionRepositories.Savers;
+using Voting.Repositories.ElectionRepositories;
+using Voting.Repositories.ElectionRepositories.Savers;
 
 namespace Voting.Services.ElectionServices
 {

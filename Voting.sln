@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandidateServiceUnitTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandidateRepositoryUnitTests", "CandidateRepositoryUnitTests\CandidateRepositoryUnitTests.csproj", "{78A57662-6980-42AE-81DC-8927A0A93D30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VotingRepositories", "VotingRepositories\VotingRepositories.csproj", "{BC203CFD-30A0-4092-81C5-4582AAAA4968}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voting.Repositories", "Voting.Repositories\Voting.Repositories.csproj", "{BC203CFD-30A0-4092-81C5-4582AAAA4968}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionSaverUnitTests", "ElectionSaverUnitTests\ElectionSaverUnitTests.csproj", "{E35C3253-C799-42E1-99A9-81C968FFFF1B}"
 EndProject

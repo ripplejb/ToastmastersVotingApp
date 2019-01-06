@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
 using Voting.Services.Exceptions;
-using VotingRepositories.CandidateRepositories;
-using VotingRepositories.CandidateRepositories.Builders;
-using VotingRepositories.CandidateRepositories.Savers;
+using Voting.Repositories.CandidateRepositories;
+using Voting.Repositories.CandidateRepositories.Builders;
+using Voting.Repositories.CandidateRepositories.Savers;
 
 namespace Voting.Services.CandidateServices
 {

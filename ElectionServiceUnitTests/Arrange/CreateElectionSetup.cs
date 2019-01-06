@@ -1,7 +1,7 @@
 using Moq;
 using Voting.ServiceContracts.Models;
-using VotingRepositories.ElectionRepositories;
-using VotingRepositories.ElectionRepositories.Savers;
+using Voting.Repositories.ElectionRepositories;
+using Voting.Repositories.ElectionRepositories.Savers;
 
 namespace ElectionServiceUnitTests.Arrange
 {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
 
-namespace VotingRepositories.CandidateRepositories.Builders
+namespace Voting.Repositories.CandidateRepositories.Builders
 {
     public interface ICandidateBuilder
     {
