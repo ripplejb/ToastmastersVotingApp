@@ -42,10 +42,7 @@ namespace Voting.Repositories.ElectionRepositories.Savers
         public async Task RemoveAllExpiredElectionsAsync()
         {
             var elections = _votingContext.Elections.Where(e => DateTime.Compare(e.ExpirationDate, DateTime.Now) < 0);
-            foreach (var election in elections)
-            {
-                _votingContext.Elections.Remove(election);
-            }
+            _votingContext.RemoveRange(elections);
             var affectedRows = await _votingContext.SaveChangesAsync();
         }
 

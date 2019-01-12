@@ -33,13 +33,13 @@ namespace ElectionRepositoryUnitTests
 
             var ballot1 = new Ballot()
             {
-                Name = "Speaker 1",
+                Name = "Ballot 1",
             };
             ballot1 = (await context.Ballots.AddAsync(ballot1)).Entity;
             
             var ballot2 = new Ballot()
             {
-                Name = "Speaker 2",
+                Name = "Ballot 2",
             };
             ballot2 = (await context.Ballots.AddAsync(ballot2)).Entity;
 
@@ -166,15 +166,22 @@ namespace ElectionRepositoryUnitTests
                     ExpirationDate = DateTime.Now.Add(new TimeSpan(-10, 0, 0, 0)),
                 });
                 
+
+                // Act : Save an expired election with all the data.
                 SaveCompleteElection(context, saver);
 
-                // Act
+                // Assert : assert it is saved.
+                Assert.True(context.Ballots.Any());         
+                Assert.True(context.BallotCandidates.Any());
+
+                //Act : Remove expired election
                 await saver.RemoveAllExpiredElectionsAsync();
 
 
-                // Assert
+                // Assert : Make sure all the ballots and ballot candidates are removed.
                 Assert.True(context.Elections.Count() == 1);
-                
+                Assert.True(!context.Ballots.Any());         
+                Assert.True(!context.BallotCandidates.Any());
             }
         }
         
