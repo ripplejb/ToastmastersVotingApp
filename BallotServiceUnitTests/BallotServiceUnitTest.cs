@@ -25,7 +25,7 @@ namespace BallotServiceUnitTests
         {
             // Arrange
             var mockSaver = new Mock<IBallotSaver>();
-            var election = new Election()
+            var election = new Election
             {
                 Id = 1,
                 CreatedDate = DateTime.Now,
@@ -33,17 +33,18 @@ namespace BallotServiceUnitTests
                 ExpirationDate = DateTime.Now.AddDays(5)
             };
             
-            var ballot = new Ballot()
+            var ballot = new Ballot
             {
                 Name = "Speakers Ballot",
                 Election = election
             };
 
-            mockSaver.Setup(bs => bs.AddAsync(ballot)).ReturnsAsync(() =>
+            mockSaver.Setup(bs => bs.AddAsync(It.IsAny<Ballot>()))
+                .ReturnsAsync((Ballot b) => b)
+                .Callback<Ballot>(b =>
             {
-                ballot.Id = 1;
-                return ballot;
-            });
+                b.Id = 1;
+            }); 
 
             IBallotService service = new BallotService(mockSaver.Object);
             
