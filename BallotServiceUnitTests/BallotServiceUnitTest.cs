@@ -14,12 +14,7 @@ namespace BallotServiceUnitTests
 {
     public class BallotServiceUnitTest
     {
-        #region Private Methods
-
-        
-
-        #endregion
-        
+      
         [Fact]
         public async void CreateTest()
         {
