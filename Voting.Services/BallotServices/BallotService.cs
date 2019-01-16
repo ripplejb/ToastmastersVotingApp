@@ -34,6 +34,11 @@ namespace Voting.Services.BallotServices
             return await _ballotSaver.AddAsync(ballot);
         }
 
+        public async Task<Ballot> UpdateAsync(Ballot ballot)
+        {
+            return await _ballotSaver.UpdateAsync(ballot);
+        }
+
         #endregion
 
     }
