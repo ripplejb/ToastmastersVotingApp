@@ -7,5 +7,6 @@ namespace Voting.Repositories.BallotRepositories
     {
         Task<Ballot> AddAsync(Ballot ballot);
         Task<Ballot> UpdateAsync(Ballot ballot);
+        Task DeleteAsync(int id);
     }
 }
