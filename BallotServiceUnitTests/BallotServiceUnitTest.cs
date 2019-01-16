@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestPlatform.Common.DataCollection;
 using Moq;
-using UnitTestDbContextOptionProvider;
 using Voting.Repositories.BallotRepositories;
-using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
-using Voting.Services.ElectionServices;
 using Xunit;
 
 namespace BallotServiceUnitTests
