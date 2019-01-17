@@ -10,6 +10,7 @@ namespace Voting.Services.BallotServices
         Task<Ballot> AddAsync(Ballot ballot);
         Task<Ballot> UpdateAsync(Ballot ballot);
         Task DeleteAsync(int id);
+        Task<Ballot> GetByIdAsync(int id);
 
     }
 }

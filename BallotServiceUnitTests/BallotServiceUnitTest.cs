@@ -2,6 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Moq;
 using Voting.Repositories.BallotRepositories;
+using Voting.Repositories.BallotRepositories.Builders;
+using Voting.Repositories.BallotRepositories.Savers;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using Xunit;
@@ -45,7 +47,7 @@ namespace BallotServiceUnitTests
                 b.Id = 1;
             }); 
 
-            IBallotService service = new BallotService(mockSaver.Object);
+            IBallotService service = new BallotService(mockSaver.Object, null);
             
             // Act
             ballot = await service.AddAsync(ballot);
@@ -71,7 +73,7 @@ namespace BallotServiceUnitTests
                 
             mockSaver.Verify(saver => saver.UpdateAsync(It.IsAny<Ballot>()), Times.AtMostOnce);
 
-            var service = new BallotService(mockSaver.Object);
+            var service = new BallotService(mockSaver.Object, null);
             
             // Act
             var ballotUpdate = await service.UpdateAsync(GetSampleBallot(null));
@@ -93,12 +95,36 @@ namespace BallotServiceUnitTests
             // Assert setup
             mockSaver.Verify(saver => saver.DeleteAsync(It.IsAny<int>()), Times.AtMostOnce);
             
-            var service = new BallotService(mockSaver.Object);
+            var service = new BallotService(mockSaver.Object, null);
             
             // Act
             await service.DeleteAsync(1);
             
             
+
+        }
+
+        [Fact]
+        public async void GetByIdTest()
+        {
+            // Arrange
+            var mockBuilder = new Mock<IBallotBuilder>();
+            mockBuilder.Setup(bb => bb.GetByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync((int i) => new Ballot
+                {
+                    Name = "Speakers",
+                    Id = i
+                });
+            
+            mockBuilder.Verify(saver => saver.GetByIdAsync(It.IsAny<int>()), Times.AtMostOnce);
+            
+            var service = new BallotService(null, mockBuilder.Object);
+            
+            // Act
+            var ballot = await service.GetByIdAsync(1);
+
+            // Assert
+            Assert.True(ballot.Id == 1);
 
         }
     }
