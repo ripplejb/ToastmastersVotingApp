@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestPlatform.Common.DataCollection;
 using UnitTestDbContextOptionProvider;
+using Voting.Repositories;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
 using Voting.Repositories.ElectionRepositories;
@@ -17,7 +18,7 @@ namespace ElectionRepositoryUnitTests
     {
         #region Private Methods
 
-        private async void SaveCompleteElection(VotingContext context, IElectionSaver saver)
+        private async void SaveCompleteElection(VotingContext context, IRepository<Election> saver)
         {
             var candidate1 = new Candidate()
             {

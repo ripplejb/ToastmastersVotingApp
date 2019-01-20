@@ -1,9 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Moq;
-using Voting.Repositories.BallotRepositories;
-using Voting.Repositories.BallotRepositories.Builders;
-using Voting.Repositories.BallotRepositories.Savers;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using Xunit;
@@ -29,7 +27,7 @@ namespace BallotServiceUnitTests
         public async void CreateTest()
         {
             // Arrange
-            var mockSaver = new Mock<IBallotSaver>();
+            var mockSaver = new Mock<IRepository<Ballot>>();
             var election = new Election
             {
                 Id = 1,
@@ -47,7 +45,7 @@ namespace BallotServiceUnitTests
                 b.Id = 1;
             }); 
 
-            IBallotService service = new BallotService(mockSaver.Object, null);
+            IBallotService service = new BallotService(mockSaver.Object);
             
             // Act
             ballot = await service.AddAsync(ballot);
@@ -65,7 +63,7 @@ namespace BallotServiceUnitTests
         public async void UpdateTest()
         {
             // Arrange
-            var mockSaver = new Mock<IBallotSaver>();
+            var mockSaver = new Mock<IRepository<Ballot>>();
 
 
             mockSaver.Setup(bs => bs.UpdateAsync(It.IsAny<Ballot>()))
@@ -73,7 +71,7 @@ namespace BallotServiceUnitTests
                 
             mockSaver.Verify(saver => saver.UpdateAsync(It.IsAny<Ballot>()), Times.AtMostOnce);
 
-            var service = new BallotService(mockSaver.Object, null);
+            var service = new BallotService(mockSaver.Object);
             
             // Act
             var ballotUpdate = await service.UpdateAsync(GetSampleBallot(null));
@@ -89,16 +87,19 @@ namespace BallotServiceUnitTests
         public async void DeleteTest()
         {
             // Arrange
-            var mockSaver = new Mock<IBallotSaver>();
-            mockSaver.Setup(saver => saver.DeleteAsync(It.IsAny<int>())).Returns(Task.CompletedTask);
+            var mockSaver = new Mock<IRepository<Ballot>>();
+            mockSaver.Setup(saver => saver.RemoveAsync(It.IsAny<Ballot>())).Returns(Task.CompletedTask);
 
             // Assert setup
-            mockSaver.Verify(saver => saver.DeleteAsync(It.IsAny<int>()), Times.AtMostOnce);
+            mockSaver.Verify(saver => saver.RemoveAsync(It.IsAny<Ballot>()), Times.AtMostOnce);
             
-            var service = new BallotService(mockSaver.Object, null);
+            var service = new BallotService(mockSaver.Object);
             
             // Act
-            await service.DeleteAsync(1);
+            await service.RemoveAsync(new Ballot
+            {
+                Name = "Speaker 1"
+            });
             
             
 
@@ -108,7 +109,7 @@ namespace BallotServiceUnitTests
         public async void GetByIdTest()
         {
             // Arrange
-            var mockBuilder = new Mock<IBallotBuilder>();
+            var mockBuilder = new Mock<IRepository<Ballot>>();
             mockBuilder.Setup(bb => bb.GetByIdAsync(It.IsAny<int>()))
                 .ReturnsAsync((int i) => new Ballot
                 {
@@ -118,7 +119,7 @@ namespace BallotServiceUnitTests
             
             mockBuilder.Verify(saver => saver.GetByIdAsync(It.IsAny<int>()), Times.AtMostOnce);
             
-            var service = new BallotService(null, mockBuilder.Object);
+            var service = new BallotService(mockBuilder.Object);
             
             // Act
             var ballot = await service.GetByIdAsync(1);

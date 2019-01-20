@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Voting.Repositories.BallotRepositories;
-using Voting.Repositories.BallotRepositories.Builders;
-using Voting.Repositories.BallotRepositories.Savers;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
 
 namespace Voting.Services.BallotServices
@@ -11,17 +9,15 @@ namespace Voting.Services.BallotServices
     {
         #region Private Member Variables
 
-        private readonly IBallotSaver _ballotSaver;
-        private readonly IBallotBuilder _ballotBuilder;
+        private readonly IRepository<Ballot> _repository;
 
         #endregion
 
         #region Constructors
 
-        public BallotService(IBallotSaver ballotSaver, IBallotBuilder ballotBuilder)
+        public BallotService(IRepository<Ballot> repository)
         {
-            _ballotSaver = ballotSaver;
-            _ballotBuilder = ballotBuilder;
+            _repository = repository;
         }
 
         #endregion
@@ -35,22 +31,22 @@ namespace Voting.Services.BallotServices
 
         public async Task<Ballot> AddAsync(Ballot ballot)
         {
-            return await _ballotSaver.AddAsync(ballot);
+            return await _repository.AddAsync(ballot);
         }
 
         public async Task<Ballot> UpdateAsync(Ballot ballot)
         {
-            return await _ballotSaver.UpdateAsync(ballot);
+            return await _repository.UpdateAsync(ballot);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task RemoveAsync(Ballot ballot)
         {
-            await _ballotSaver.DeleteAsync(id);
+            await _repository.RemoveAsync(ballot);
         }
 
         public async Task<Ballot> GetByIdAsync(int id)
         {
-            return await _ballotBuilder.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id);
         }
         #endregion
 

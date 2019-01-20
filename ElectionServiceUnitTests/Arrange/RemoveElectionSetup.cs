@@ -1,17 +1,17 @@
 using System;
+using System.Threading.Tasks;
 using Moq;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
-using Voting.Repositories.ElectionRepositories;
-using Voting.Repositories.ElectionRepositories.Savers;
 
 namespace ElectionServiceUnitTests.Arrange
 {
     public class RemoveElectionSetup
     {
-        public void SetupMock(Mock<IElectionSaver> mockElectionRepository, Func<Election,Election> callback)
+        public void SetupMock(Mock<IRepository<Election>> mockElectionRepository)
         {
             mockElectionRepository.Setup(repo => repo.RemoveAsync(It.IsAny<Election>()))
-                .ReturnsAsync((Election election) => election).Callback<Election>((election) => callback(election));
+                .Returns(Task.CompletedTask);
         }
     }
 }

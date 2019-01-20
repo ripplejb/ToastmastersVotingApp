@@ -1,11 +1,9 @@
 using System.Linq;
 using UnitTestDbContextOptionProvider;
+using Voting.Repositories;
 using Xunit;
 using Voting.ServiceContracts.DbContexts;
 using Voting.ServiceContracts.Models;
-using Voting.Repositories.CandidateRepositories;
-using Voting.Repositories.CandidateRepositories.Builders;
-using Voting.Repositories.CandidateRepositories.Savers;
 
 namespace CandidateRepositoryUnitTests
 {
@@ -17,7 +15,7 @@ namespace CandidateRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                var saver = new CandidateSaver(context);
+                var saver = new Repository<Candidate>(context);
 
                 // Act
                 await saver.AddAsync(new Candidate()
@@ -48,7 +46,7 @@ namespace CandidateRepositoryUnitTests
                 // Arrange
                 using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
                 {
-                    var repository = new CandidateSaver(context);
+                    var repository = new Repository<Candidate>(context);
 
                     // Act
                     await repository.AddAsync(new Candidate()
@@ -71,7 +69,7 @@ namespace CandidateRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                var saver = new CandidateSaver(context);
+                var saver = new Repository<Candidate>(context);
                 var candidate = new Candidate
                 {
                     Name = "Ripal Barot"
@@ -95,7 +93,7 @@ namespace CandidateRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                var saver = new CandidateSaver(context);
+                var saver = new Repository<Candidate>(context);
                 var candidate = new Candidate
                 {
                     Name = "Ripal Barot"
@@ -122,7 +120,7 @@ namespace CandidateRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                var saver = new CandidateSaver(context);
+                var saver = new Repository<Candidate>(context);
                 var candidate = new Candidate
                 {
                     Id = 1,
@@ -149,7 +147,7 @@ namespace CandidateRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                var saver = new CandidateSaver(context);
+                var saver = new Repository<Candidate>(context);
                 var candidate = new Candidate
                 {
                     Id = 1,
@@ -174,30 +172,26 @@ namespace CandidateRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                var saver = new CandidateSaver(context);
-                var builder = new CandidateBuilder(context);
+                var repository = new Repository<Candidate>(context);
 
                 // Act
-                await saver.AddAsync(new Candidate()
+                await repository.AddAsync(new Candidate()
                 {
                     Id = 1,
                     Name = "Ripal Barot"
                 });
-                await saver.AddAsync(new Candidate()
+                await repository.AddAsync(new Candidate()
                 {
                     Id = 2,
                     Name = "Falguni Barot"
                 });
-                await saver.AddAsync(new Candidate()
+                await repository.AddAsync(new Candidate()
                 {
                     Id = 3,
                     Name = "Neil Barot"
                 });
 
-                var candidateList = await builder.SearchAsync(new CandidateSearchRequest
-                {
-                    Name = "Barot",
-                });
+                var candidateList = await repository.SearchAsync(candidate => candidate.Name.Contains("Barot"));
                 
 
                 // Assert
@@ -211,28 +205,27 @@ namespace CandidateRepositoryUnitTests
             // Arrange
             using (var context = new VotingContext(new SqliteProvider().GetDbContextOptions()))
             {
-                var saver = new CandidateSaver(context);
-                var builder = new CandidateBuilder(context);
+                var repository = new Repository<Candidate>(context);
 
                 // Act
-                await saver.AddAsync(new Candidate()
+                await repository.AddAsync(new Candidate()
                 {
                     Id = 1,
                     Name = "Ripal Barot"
                 });
-                await saver.AddAsync(new Candidate()
+                await repository.AddAsync(new Candidate()
                 {
                     Id = 2,
                     Name = "Falguni Barot"
                 });
-                await saver.AddAsync(new Candidate()
+                await repository.AddAsync(new Candidate()
                 {
                     Id = 3,
                     Name = "Neil Barot"
                 });
 
                 // Assert
-                var candidate = await builder.GetByIdAsync(2);
+                var candidate = await repository.GetByIdAsync(2);
                 Assert.Equal("Falguni Barot", candidate.Name);
             }
             

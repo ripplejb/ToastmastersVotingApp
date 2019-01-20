@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ElectionServiceUnitTests.Arrange;
 using Moq;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using Voting.Services.ElectionServices;
-using Voting.Repositories.ElectionRepositories;
-using Voting.Repositories.ElectionRepositories.Savers;
 using Xunit;
 
 namespace ElectionServiceUnitTests
@@ -23,9 +20,9 @@ namespace ElectionServiceUnitTests
             return new Mock<IBallotService>();
         }
 
-        private Mock<IElectionSaver> GetElectionRepositoryMock()
+        private Mock<IRepository<Election>> GetElectionRepositoryMock()
         {
-            return new Mock<IElectionSaver>();
+            return new Mock<IRepository<Election>>();
         }
         
         #endregion
@@ -42,19 +39,19 @@ namespace ElectionServiceUnitTests
 
             new TemplateCreateElectionSetup().SetupMock(mockElectionRepository, mockBallotService);
             
-            var electionService = new ElectionService(mockElectionRepository.Object, mockBallotService.Object);
+            var electionService = new ElectionService(mockElectionRepository.Object);
 
             // Act
             Election result = await electionService.CreateElectionUsingTemplateAsync("default", new Election()
             {
                 ElectionQr = Guid.NewGuid(),
-                CreatedDate = DateTime.Now,
+                CreatedDate = DateTime.Now
             });
 
             // Assert
             Assert.NotNull(result);
-            Assert.NotNull(result?.Ballots);
-            Assert.True((result?.Ballots).Any());
+            Assert.NotNull(result.Ballots);
+            Assert.True(result.Ballots.Any());
         }
         
         [Fact]
@@ -70,7 +67,7 @@ namespace ElectionServiceUnitTests
                 ElectionQr = Guid.NewGuid(),
                 CreatedDate = DateTime.UtcNow
             };
-            var electionService = new ElectionService(mockElectionRepository.Object, null);
+            var electionService = new ElectionService(mockElectionRepository.Object);
             
             // Act
             Election result = await electionService.AddAsync(election);
@@ -96,21 +93,17 @@ namespace ElectionServiceUnitTests
                 ExpirationDate = DateTime.Now.Add(new TimeSpan(7, 0, 0, 0))
             };
 
-            Election repoResult = election;
-
-            deleteElectionSetup.SetupMock(mockElectionRepository, 
-                (e) => { 
-                repoResult = e;
-                return e;
-            });
-            var electionService = new ElectionService(mockElectionRepository.Object, null);
+            deleteElectionSetup.SetupMock(mockElectionRepository);
+            var electionService = new ElectionService(mockElectionRepository.Object);
+            
+            mockElectionRepository.Verify(repo => repo.RemoveAsync(It.IsAny<Election>()),Times.AtMostOnce);
             
             // Act
-            Election result = await electionService.RemoveAsync(election);
+            await electionService.RemoveAsync(election);
             
             // Assert
-            Assert.Same(repoResult, result);
-            Assert.True(result.Id == 1);
+            
+            //Verify if repository is called. see the code above
         }
         
         [Fact]
@@ -118,13 +111,15 @@ namespace ElectionServiceUnitTests
         {
             // Arrange
             var mockRepo = GetElectionRepositoryMock();
-            var service = new ElectionService(mockRepo.Object, null);
+            var service = new ElectionService(mockRepo.Object);
+            mockRepo.Verify(repo => repo.RemoveAsync(It.IsAny<Election>()), Times.AtMostOnce);
             
             // Act
             await service.RemoveAllExpiredElectionsAsync();
             
             // Assert
-            mockRepo.Verify((repo) => repo.RemoveAllExpiredElectionsAsync(), Times.Once);
+            
+            //Verify above.
             
         }
 

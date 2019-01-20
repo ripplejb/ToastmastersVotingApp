@@ -3,12 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Voting.ServiceContracts.Models
 {
-    public class BallotCandidate
+    public class BallotCandidate : EntityBase
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         public int CandidateId { get; set; }
         public Candidate Candidate { get; set; }
         public int BallotId { get; set; }

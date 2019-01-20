@@ -1,9 +1,8 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
-using Voting.Services.BallotServices;
-using Voting.Repositories.ElectionRepositories;
-using Voting.Repositories.ElectionRepositories.Savers;
 
 namespace Voting.Services.ElectionServices
 {
@@ -11,17 +10,15 @@ namespace Voting.Services.ElectionServices
     {
         #region Private Member Variables
 
-        private readonly IElectionSaver _electionSaver;
-        private readonly IBallotService _ballotService;
+        private readonly IRepository<Election> _repository;
 
         #endregion
-        
+
         #region Constructors
 
-        public ElectionService(IElectionSaver electionSaver, IBallotService ballotService)
+        public ElectionService(IRepository<Election> repository)
         {
-            _electionSaver = electionSaver;
-            _ballotService = ballotService;
+            _repository = repository;
         }
 
         #endregion
@@ -30,24 +27,26 @@ namespace Voting.Services.ElectionServices
 
         public async Task<Election> CreateElectionUsingTemplateAsync(string templateName, Election election)
         {
-            election.Ballots = await _ballotService.GetDefaultBallotsFromTemplateAsync(templateName);
-            return await AddAsync(election);
+            throw new NotImplementedException();
         }
 
         public async Task<Election> AddAsync(Election election)
         {
-            election = await _electionSaver.AddAsync(election);
+            election = await _repository.AddAsync(election);
             return election;
         }
 
-        public async Task<Election> RemoveAsync(Election election)
+        public async Task RemoveAsync(Election election)
         {
-            return await _electionSaver.RemoveAsync(election);
+           await _repository.RemoveAsync(election);
         }
 
         public async Task RemoveAllExpiredElectionsAsync()
         {
-            await _electionSaver.RemoveAllExpiredElectionsAsync();
+            var elections =
+                await _repository.SearchAsync(election => 
+                    election.ExpirationDate.CompareTo(DateTime.Now) < 0);
+            await Task.WhenAll(elections.Select(election => _repository.RemoveAsync(election)));
         }
 
         #endregion

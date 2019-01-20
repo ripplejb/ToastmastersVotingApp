@@ -7,7 +7,7 @@ namespace Voting.Services.ElectionServices
     {
         Task<Election> CreateElectionUsingTemplateAsync(string templateName, Election election);
         Task<Election> AddAsync(Election election);
-        Task<Election> RemoveAsync(Election election);
+        Task RemoveAsync(Election election);
         Task RemoveAllExpiredElectionsAsync();
     }
 }

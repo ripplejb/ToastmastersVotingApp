@@ -9,7 +9,7 @@ namespace Voting.Services.BallotServices
         Task<IEnumerable<Ballot>> GetDefaultBallotsFromTemplateAsync(string templateName);
         Task<Ballot> AddAsync(Ballot ballot);
         Task<Ballot> UpdateAsync(Ballot ballot);
-        Task DeleteAsync(int id);
+        Task RemoveAsync(Ballot ballot);
         Task<Ballot> GetByIdAsync(int id);
 
     }

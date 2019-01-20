@@ -5,11 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Voting.ServiceContracts.Models
 {
-    public class Election
+    public class Election : EntityBase
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public Guid ElectionQr { get; set; }
         public IEnumerable<Ballot> Ballots { get; set; }
         public DateTime CreatedDate { get; set; }

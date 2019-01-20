@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
 using Voting.Services.Exceptions;
-using Voting.Repositories.CandidateRepositories;
-using Voting.Repositories.CandidateRepositories.Builders;
-using Voting.Repositories.CandidateRepositories.Savers;
 
 namespace Voting.Services.CandidateServices
 {
@@ -13,17 +11,15 @@ namespace Voting.Services.CandidateServices
     {
         #region Private Member Variables
 
-        private readonly ICandidateBuilder _candidateBuilder;
-        private readonly ICandidateSaver _candidateSaver;
+        private readonly IRepository<Candidate> _repository;
 
         #endregion
 
         #region Constructors
 
-        public CandidateService(ICandidateBuilder candidateRepository, ICandidateSaver candidateSaver)
+        public CandidateService(IRepository<Candidate> repository)
         {
-            _candidateBuilder = candidateRepository;
-            _candidateSaver = candidateSaver;
+            _repository = repository;
         }
 
         #endregion
@@ -34,7 +30,7 @@ namespace Voting.Services.CandidateServices
         {
             try
             {
-                return await _candidateSaver.AddAsync(candidate);
+                return await _repository.AddAsync(candidate);
             }
             catch (Exception e)
             {
@@ -47,7 +43,7 @@ namespace Voting.Services.CandidateServices
         {
             try
             {
-                return await _candidateSaver.UpdateAsync(candidate);
+                return await _repository.UpdateAsync(candidate);
             }
             catch (Exception e)
             {
@@ -56,11 +52,11 @@ namespace Voting.Services.CandidateServices
             }
         }
 
-        public async Task<Candidate> RemoveAsync(Candidate candidate)
+        public async Task RemoveAsync(Candidate candidate)
         {
             try
             {
-                return await _candidateSaver.RemoveAsync(candidate);
+                await _repository.RemoveAsync(candidate);
             }
             catch (Exception e)
             {
@@ -71,7 +67,9 @@ namespace Voting.Services.CandidateServices
 
         public async Task<IEnumerable<Candidate>> SearchAsync(CandidateSearchRequest candidateSearchRequest)
         {
-            return await _candidateBuilder.SearchAsync(candidateSearchRequest);
+            return await _repository.SearchAsync(candidate =>
+                    candidate.Name.Contains(candidateSearchRequest.Name)
+                );
         }
 
         #endregion

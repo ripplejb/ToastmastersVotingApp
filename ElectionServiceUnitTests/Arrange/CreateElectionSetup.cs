@@ -1,13 +1,12 @@
 using Moq;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
-using Voting.Repositories.ElectionRepositories;
-using Voting.Repositories.ElectionRepositories.Savers;
 
 namespace ElectionServiceUnitTests.Arrange
 {
     public class CreateElectionSetup
     {
-        public void SetupMock(Mock<IElectionSaver> mockElectionRepository)
+        public void SetupMock(Mock<IRepository<Election>> mockElectionRepository)
         {
             mockElectionRepository.Setup(repo => repo.AddAsync(It.IsAny<Election>()))
                 .ReturnsAsync((Election election) =>

@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Moq;
+using Voting.Repositories;
 using Voting.ServiceContracts.Models;
 using Voting.Services.CandidateServices;
 using Voting.Services.Exceptions;
-using Voting.Repositories.CandidateRepositories;
-using Voting.Repositories.CandidateRepositories.Builders;
-using Voting.Repositories.CandidateRepositories.Savers;
 using Xunit;
 
 namespace CandidateServiceUnitTests
@@ -47,7 +48,7 @@ namespace CandidateServiceUnitTests
         public async void CandidateCreateTest()
         {
             // Arrange
-            var mock = new Mock<ICandidateSaver>();
+            var mock = new Mock<IRepository<Candidate>>();
             var candidate = new Candidate()
             {
                 Name = "Ripal Barot"
@@ -60,7 +61,7 @@ namespace CandidateServiceUnitTests
                 Name = "Ripal Barot"
             });
 
-            ICandidateService candidateService = new CandidateService(null, mock.Object);
+            ICandidateService candidateService = new CandidateService(mock.Object);
 
             // Act
             candidate = await candidateService.AddAsync(candidate);
@@ -74,7 +75,7 @@ namespace CandidateServiceUnitTests
         public async void CandidateUpdateTest()
         {
             // Arrange
-            var mock = new Mock<ICandidateSaver>();
+            var mock = new Mock<IRepository<Candidate>>();
             var candidate = new Candidate()
             {
                 Name = "Ripal Barot"
@@ -99,7 +100,7 @@ namespace CandidateServiceUnitTests
             mock.Setup(repo => repo.UpdateAsync(It.Is<Candidate>(c => c.Id != 1)))
                 .Throws<DbException<Candidate>>();
 
-            ICandidateService candidateService = new CandidateService(null, mock.Object);
+            ICandidateService candidateService = new CandidateService(mock.Object);
 
             // Act
             candidate = await candidateService.AddAsync(candidate);
@@ -122,35 +123,25 @@ namespace CandidateServiceUnitTests
         public async void CandidateRemoveTest()
         {
             // Arrange
-            var candidates = GetCandidateList();
-
             var removedCandidate = new Candidate
             {
                 Id = 3,
                 Name = "Jason"
             };
 
-            var mockRepo = new Mock<ICandidateSaver>();
+            var mockRepo = new Mock<IRepository<Candidate>>();
             mockRepo.Setup(m => m.RemoveAsync(It.IsAny<Candidate>()))
-                .ReturnsAsync((Candidate candidate) =>
-                {
-                    if (candidates.RemoveAll(e => e.Id == candidate.Id) > 0)
-                        return candidate;
-                    else
-                    {
-                        throw new DbException<Candidate>();
-                    }
-                });
+                .Returns(Task.CompletedTask);
             
-            var candidateService = new CandidateService(null, mockRepo.Object);
+            var candidateService = new CandidateService(mockRepo.Object);
+            
+            mockRepo.Verify(repo => repo.RemoveAsync(It.IsAny<Candidate>()), Times.AtMostOnce);
             
             // Act
             await candidateService.RemoveAsync(removedCandidate);
             
             // Assert
-            Assert.Equal(2, candidates.Count);
-            await Assert.ThrowsAsync<DbException<Candidate>>(async () => await candidateService.RemoveAsync(removedCandidate));
-
+            //See verify above.
         }
         
         [Fact]
@@ -164,14 +155,14 @@ namespace CandidateServiceUnitTests
                 Name = "Jason"
             };
 
-            var mockRepo = new Mock<ICandidateBuilder>();
-            mockRepo.Setup(m => m.SearchAsync(It.IsAny<CandidateSearchRequest>()))
-                .ReturnsAsync((CandidateSearchRequest request) =>
+            var mockRepo = new Mock<IRepository<Candidate>>();
+            mockRepo.Setup(m => m.SearchAsync(It.IsAny<Expression<Func<Candidate, bool>>>()))
+                .ReturnsAsync((Expression<Func<Candidate, bool>> predicate) =>
                 {
-                    return candidates.FindAll(e => e.Name == request.Name);
+                    return candidates.Where(predicate.Compile());
                 });
             
-            var candidateService = new CandidateService(mockRepo.Object, null);
+            var candidateService = new CandidateService(mockRepo.Object);
             
             // Act
             var res = await candidateService.SearchAsync(searchRequest);

@@ -8,7 +8,7 @@ namespace Voting.Services.CandidateServices
     {
         Task<Candidate> AddAsync(Candidate candidate);
         Task<Candidate> UpdateAsync(Candidate candidate);
-        Task<Candidate> RemoveAsync(Candidate candidate);
+        Task RemoveAsync(Candidate candidate);
         Task<IEnumerable<Candidate>> SearchAsync(CandidateSearchRequest candidateSearchRequest);
     }
 }
