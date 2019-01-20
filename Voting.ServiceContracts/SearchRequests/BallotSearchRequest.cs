@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Voting.ServiceContracts.Models
+namespace Voting.ServiceContracts.SearchRequests
 {
     public class BallotSearchRequest
     {

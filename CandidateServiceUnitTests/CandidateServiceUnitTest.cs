@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Moq;
 using Voting.Repositories;
 using Voting.ServiceContracts.Models;
+using Voting.ServiceContracts.SearchRequests;
 using Voting.Services.CandidateServices;
 using Voting.Services.Exceptions;
 using Xunit;

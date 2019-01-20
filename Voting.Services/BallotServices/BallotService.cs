@@ -24,11 +24,6 @@ namespace Voting.Services.BallotServices
         
         #region Public Methods
 
-        public Task<IEnumerable<Ballot>> GetDefaultBallotsFromTemplateAsync(string templateName)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<Ballot> AddAsync(Ballot ballot)
         {
             return await _repository.AddAsync(ballot);

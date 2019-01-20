@@ -62,7 +62,7 @@ namespace ElectionServiceUnitTests
             var mockElectionRepository = GetElectionRepositoryMock();
             var createElectionSetup = new CreateElectionSetup();
             createElectionSetup.SetupMock(mockElectionRepository);
-            var election = new Election()
+            var election = new Election
             {
                 ElectionQr = Guid.NewGuid(),
                 CreatedDate = DateTime.UtcNow
@@ -84,7 +84,7 @@ namespace ElectionServiceUnitTests
             var mockElectionRepository = GetElectionRepositoryMock();
             var deleteElectionSetup = new RemoveElectionSetup();
 
-            var election = new Election()
+            var election = new Election
             {
                 Id = 1,
                 Ballots = new[] {new Ballot()},

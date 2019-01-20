@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
+using Voting.ServiceContracts.SearchRequests;
 
 namespace Voting.Services.CandidateServices
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Voting.Repositories;
 using Voting.ServiceContracts.Models;
+using Voting.ServiceContracts.SearchRequests;
 using Voting.Services.Exceptions;
 
 namespace Voting.Services.CandidateServices
