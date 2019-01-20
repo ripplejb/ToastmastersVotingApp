@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using ElectionServiceUnitTests.Arrange;
 using Moq;
@@ -6,6 +7,7 @@ using Voting.Repositories;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using Voting.Services.ElectionServices;
+using Voting.TemplateLoaders.JsonTemplateLoader;
 using Xunit;
 
 namespace ElectionServiceUnitTests
@@ -34,24 +36,27 @@ namespace ElectionServiceUnitTests
         {
             
             // Arrange
-            var mockBallotService = GetBallotServiceMock();
             var mockElectionRepository = GetElectionRepositoryMock();
 
-            new TemplateCreateElectionSetup().SetupMock(mockElectionRepository, mockBallotService);
+            mockElectionRepository.Setup(repo => repo.AddAsync(It.IsAny<Election>()))
+                .ReturnsAsync((Election election) => election);
             
             var electionService = new ElectionService(mockElectionRepository.Object);
+            
+            var mockElectionTemplateLoader = new Mock<IElectionJsonTemplateLoader>();
+            mockElectionTemplateLoader.Setup(el => el.Load(It.IsAny<string>()))
+                .Returns((string str) => 
+                    new Election
+                {
+                    ElectionQr = Guid.NewGuid()
+                } );
 
             // Act
-            Election result = await electionService.CreateElectionUsingTemplateAsync("default", new Election()
-            {
-                ElectionQr = Guid.NewGuid(),
-                CreatedDate = DateTime.Now
-            });
+            var result = await electionService.CreateElectionUsingTemplateAsync($".{Path.DirectorySeparatorChar}ElectionTemplate.json", mockElectionTemplateLoader.Object);
 
             // Assert
+            mockElectionTemplateLoader.Verify(loader => loader.Load(It.IsAny<string>()), Times.Once);
             Assert.NotNull(result);
-            Assert.NotNull(result.Ballots);
-            Assert.True(result.Ballots.Any());
         }
         
         [Fact]

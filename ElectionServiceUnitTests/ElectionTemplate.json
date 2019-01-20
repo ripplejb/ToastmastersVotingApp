@@ -1,0 +1,14 @@
+{
+  "Ballots":[
+    {
+      "Name": "Speakers"
+    },
+    {
+      "Name": "Evaluators"
+    },
+    {
+      "Name": "Table Topic Speakers"
+    }
+  ],
+  "ExpirationDays": 5
+}

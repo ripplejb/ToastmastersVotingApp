@@ -1,8 +1,10 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Voting.Repositories;
 using Voting.ServiceContracts.Models;
+using Voting.TemplateLoaders.JsonTemplateLoader;
 
 namespace Voting.Services.ElectionServices
 {
@@ -25,9 +27,16 @@ namespace Voting.Services.ElectionServices
         
         #region Public Methods
 
-        public async Task<Election> CreateElectionUsingTemplateAsync(string templateName, Election election)
+        public async Task<Election> CreateElectionUsingTemplateAsync(string templatePath, 
+            IElectionJsonTemplateLoader templateLoader)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(templatePath)) throw new Exception("Template file is missing.");
+            var election = await Task<Election>.Factory.StartNew(() =>
+            {
+                var template = File.ReadAllText(templatePath);
+                return templateLoader.Load(template);
+            });
+            return await _repository.AddAsync(election);
         }
 
         public async Task<Election> AddAsync(Election election)

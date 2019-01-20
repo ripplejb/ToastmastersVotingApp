@@ -25,4 +25,10 @@
       <ProjectReference Include="..\Voting.TemplateLoaders\Voting.TemplateLoaders.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="ElectionTemplate.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
