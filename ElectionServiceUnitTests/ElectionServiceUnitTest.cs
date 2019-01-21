@@ -7,6 +7,7 @@ using Voting.Repositories;
 using Voting.ServiceContracts.Models;
 using Voting.Services.BallotServices;
 using Voting.Services.ElectionServices;
+using Voting.Services.Exceptions;
 using Voting.TemplateLoaders.JsonTemplateLoader;
 using Xunit;
 
@@ -36,6 +37,7 @@ namespace ElectionServiceUnitTests
         {
             
             // Arrange
+            string templatePath = $".{Path.DirectorySeparatorChar}ElectionTemplate.json";
             var mockElectionRepository = GetElectionRepositoryMock();
 
             mockElectionRepository.Setup(repo => repo.AddAsync(It.IsAny<Election>()))
@@ -49,14 +51,17 @@ namespace ElectionServiceUnitTests
                     new Election
                 {
                     ElectionQr = Guid.NewGuid()
-                } );
+                });
+
 
             // Act
-            var result = await electionService.CreateElectionUsingTemplateAsync($".{Path.DirectorySeparatorChar}ElectionTemplate.json", mockElectionTemplateLoader.Object);
+            var result = await electionService.CreateElectionUsingTemplateAsync(templatePath, mockElectionTemplateLoader.Object);
 
             // Assert
-            mockElectionTemplateLoader.Verify(loader => loader.Load(It.IsAny<string>()), Times.Once);
+            mockElectionTemplateLoader.Verify(loader => loader.Load(It.IsAny<string>()), Times.AtMostOnce);
+            
             Assert.NotNull(result);
+            await Assert.ThrowsAsync<TemplateNotFoundException>(async () => await electionService.CreateElectionUsingTemplateAsync("test", mockElectionTemplateLoader.Object));
         }
         
         [Fact]
