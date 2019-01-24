@@ -39,7 +39,12 @@ namespace Voting.Services.BallotCandidateService
 
         public async Task RemoveAsync(BallotCandidate ballotCandidate)
         {
-            throw new NotImplementedException();
+            await _repository.RemoveAsync(ballotCandidate);
+        }
+
+        public async Task UpdateAsync(BallotCandidate ballotCandidate)
+        {
+            await _repository.UpdateAsync(ballotCandidate);
         }
 
         public async Task<IEnumerable<BallotCandidate>> SearchAsync(BallotCandidateSearchRequest ballotCandidateSearchRequest)
