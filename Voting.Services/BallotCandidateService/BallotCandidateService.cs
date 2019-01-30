@@ -49,7 +49,39 @@ namespace Voting.Services.BallotCandidateService
 
         public async Task<IEnumerable<BallotCandidate>> SearchAsync(BallotCandidateSearchRequest ballotCandidateSearchRequest)
         {
-            throw new NotImplementedException();
+            // TODO Unit test large query.
+            return await _repository.SearchAsync(ballotCandidate =>
+               
+                    (
+                        (ballotCandidateSearchRequest.BallotName == null) ||
+                        (ballotCandidateSearchRequest.BallotName != null &&
+                        ballotCandidate.Ballot.Name.Contains(ballotCandidateSearchRequest.BallotName))
+                    )
+                    &&
+                    (
+                        (ballotCandidateSearchRequest.CandidateName == null) ||
+                        (ballotCandidateSearchRequest.CandidateName != null &&
+                         ballotCandidate.Candidate.Name.Contains(ballotCandidateSearchRequest.CandidateName))
+                    )
+                    &&
+                    (
+                        (ballotCandidateSearchRequest.BallotId == null) ||
+                        (ballotCandidateSearchRequest.BallotId != null &&
+                         ballotCandidate.BallotId == ballotCandidateSearchRequest.BallotId)
+                    )
+                    &&
+                    (
+                        (ballotCandidateSearchRequest.CandidateId == null) ||
+                        (ballotCandidateSearchRequest.CandidateId != null &&
+                         ballotCandidate.CandidateId == ballotCandidateSearchRequest.CandidateId)
+                    )
+                    &&
+                    (
+                        (ballotCandidateSearchRequest.ElectionId == null) ||
+                        (ballotCandidateSearchRequest.ElectionId != null &&
+                         ballotCandidate.Ballot.Election.Id == ballotCandidateSearchRequest.ElectionId)
+                    )
+            );
         }
 
         #endregion

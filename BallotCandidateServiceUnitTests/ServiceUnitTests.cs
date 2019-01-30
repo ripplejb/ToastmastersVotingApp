@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Moq;
 using Voting.Repositories;
 using Voting.ServiceContracts.Models;
+using Voting.ServiceContracts.SearchRequests;
 using Voting.Services.BallotCandidateService;
 using Xunit;
 
@@ -86,6 +89,29 @@ namespace BallotCandidateServiceUnitTests
 
             // Assert
             mockRepo.Verify(repo => repo.RemoveAsync(ballotCandidate), Times.AtMostOnce);
+        }
+
+        [Fact]
+        public async Task SearchBallotCandidateServiceTest()
+        {
+            // Arrange
+
+            var ballotCandidates = new List<BallotCandidate>
+            {
+                new BallotCandidate(),
+                new BallotCandidate()
+            };
+            
+            var mockRepo = new Mock<IRepository<BallotCandidate>>();
+            mockRepo.Setup(repo => repo.SearchAsync(It.IsAny<Expression<Func<BallotCandidate, bool>>>()))
+                .ReturnsAsync((Expression<Func<BallotCandidate, bool>> predicate) => ballotCandidates);            
+            var service = new BallotCandidateService(mockRepo.Object);
+            
+            // Act
+            await service.SearchAsync(new BallotCandidateSearchRequest());
+
+            // Assert
+            mockRepo.Verify(repo => repo.SearchAsync(It.IsAny<Expression<Func<BallotCandidate, bool>>>()), Times.AtMostOnce);
         }
     }
 }
