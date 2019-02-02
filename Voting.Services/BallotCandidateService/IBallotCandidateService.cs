@@ -10,6 +10,5 @@ namespace Voting.Services.BallotCandidateService
         Task<BallotCandidate> AddAsync(Ballot ballot, Candidate candidate);
         Task RemoveAsync(BallotCandidate ballotCandidate);
         Task UpdateAsync(BallotCandidate ballotCandidate);
-        Task<IEnumerable<BallotCandidate>> SearchAsync(BallotCandidateSearchRequest ballotCandidateSearchRequest);
     }
 }

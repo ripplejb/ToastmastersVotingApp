@@ -1,6 +1,6 @@
 namespace Voting.ServiceContracts.SearchRequests
 {
-    public class BallotCandidateSearchRequest
+    public class ElectionSearchRequest
     {
         public int? BallotId { get; set; }
         public int? CandidateId { get; set; }

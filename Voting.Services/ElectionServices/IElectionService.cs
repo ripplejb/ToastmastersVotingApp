@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Voting.ServiceContracts.Models;
+using Voting.ServiceContracts.SearchRequests;
 using Voting.TemplateLoaders.JsonTemplateLoader;
 
 namespace Voting.Services.ElectionServices
