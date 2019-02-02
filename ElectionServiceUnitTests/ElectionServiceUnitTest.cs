@@ -1,10 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using ElectionServiceUnitTests.Arrange;
 using Moq;
 using Voting.Repositories;
 using Voting.ServiceContracts.Models;
+using Voting.ServiceContracts.SearchRequests;
 using Voting.Services.BallotServices;
 using Voting.Services.ElectionServices;
 using Voting.Services.Exceptions;
@@ -122,15 +124,28 @@ namespace ElectionServiceUnitTests
             // Arrange
             var mockRepo = GetElectionRepositoryMock();
             var service = new ElectionService(mockRepo.Object);
-            mockRepo.Verify(repo => repo.RemoveAsync(It.IsAny<Election>()), Times.AtMostOnce);
             
             // Act
             await service.RemoveAllExpiredElectionsAsync();
             
             // Assert
+            mockRepo.Verify(repo => repo.RemoveAsync(It.IsAny<Election>()), Times.AtMostOnce);
             
-            //Verify above.
-            
+        }
+
+        [Fact]
+        public async void SearchElectionUnitTest()
+        {
+            // Arrange
+            var mockRepo = GetElectionRepositoryMock();
+
+            var service = new ElectionService(mockRepo.Object);
+
+            // Act
+            await service.SearchAsync(new ElectionSearchRequest());
+
+            // Assert
+            mockRepo.Verify(repo => repo.SearchAsync(It.IsAny<Expression<Func<Election, bool>>>()), Times.AtMostOnce);
         }
 
         #endregion

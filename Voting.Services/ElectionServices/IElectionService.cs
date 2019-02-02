@@ -12,5 +12,6 @@ namespace Voting.Services.ElectionServices
         Task<Election> AddAsync(Election election);
         Task RemoveAsync(Election election);
         Task RemoveAllExpiredElectionsAsync();
+        Task<IEnumerable<Election>> SearchAsync(ElectionSearchRequest electionSearchRequest);
     }
 }
