@@ -93,10 +93,8 @@ namespace Voting.Services.ElectionServices
                         (electionSearchRequest.CandidateName == null)
                     ) &&
                     (
-                        (
-                            (electionSearchRequest.BallotName != null) &&
-                            election.Ballots.Any(ballot => ballot.Name.Contains(electionSearchRequest.BallotName))
-                        ) ||
+                        (electionSearchRequest.BallotName != null) &&
+                        election.Ballots.Any(ballot => ballot.Name.Contains(electionSearchRequest.BallotName)) ||
                         (electionSearchRequest.BallotName == null)
                     ) 
                 )
